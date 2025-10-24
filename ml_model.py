@@ -89,7 +89,10 @@ class FertiqueMLModel:
         )
         
         # Fill missing values
-        merged = merged.fillna(method='ffill').fillna(method='bfill')
+        merged = merged.ffill().bfill()
+        
+        # Drop any remaining rows with NaN
+        merged = merged.dropna()
         
         # Encode categorical variables
         for col in ['provinsi', 'jenis_pupuk']:
@@ -100,10 +103,14 @@ class FertiqueMLModel:
                 merged[f'{col}_encoded'] = self.label_encoders[col].transform(merged[col])
         
         # Feature engineering
+        # Ensure curah_hujan_mm has no NaN values
+        merged['curah_hujan_mm'] = merged['curah_hujan_mm'].fillna(200)
+        
         merged['curah_hujan_kategori'] = pd.cut(merged['curah_hujan_mm'], 
                                                  bins=[0, 100, 200, 300, 500, np.inf], 
                                                  labels=[0, 1, 2, 3, 4])
-        merged['curah_hujan_kategori'] = merged['curah_hujan_kategori'].astype(int)
+        # Fill any NaN from pd.cut and convert to int
+        merged['curah_hujan_kategori'] = merged['curah_hujan_kategori'].fillna(2).astype(int)
         
         merged['musim_tanam'] = merged['bulan_num'].apply(
             lambda x: 1 if x in [10, 11, 12, 1, 2, 3] else 0
