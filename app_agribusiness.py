@@ -549,10 +549,14 @@ st.sidebar.markdown("---")
 user_plan = PremiumSubscription.get_user_plan()
 plan_info = PremiumSubscription.get_plan_info(user_plan)
 
+if 'menu' not in st.session_state:
+    st.session_state.menu = "🏠 Beranda"
+
 menu = st.sidebar.radio(
     "📱 Menu Utama",
     ["🏠 Beranda", "💎 Premium Features", "🌾 Sektor Agribusiness", "💼 Dashboard Bisnis", 
-     "📊 Prediksi & Analisis", "🎮 Komunitas & Gamifikasi", "ℹ️ Tentang"]
+     "📊 Prediksi & Analisis", "🎮 Komunitas & Gamifikasi", "ℹ️ Tentang"],
+    key='menu'
 )
 
 st.sidebar.markdown("---")
@@ -638,6 +642,7 @@ if menu == "🏠 Beranda":
             st.markdown(f"<p style='text-align: center; color: #666; font-size: 14px;'>{desc}</p>", unsafe_allow_html=True)
             if st.button(f"Lihat {sector}", key=f"sector_{i}", width='stretch'):
                 st.session_state.selected_sector = sector
+                st.session_state.menu = "🌾 Sektor Agribusiness"
                 st.rerun()
 
 elif menu == "💎 Premium Features":
