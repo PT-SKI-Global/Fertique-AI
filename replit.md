@@ -10,7 +10,40 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 24, 2025)
 
-### UI/UX Improvements
+### Complete Rebranding: AgriBiz AI → Fertique AI
+**All "AgriBiz" references replaced with "Fertique AI" across:**
+1. **Main Application (app_agribusiness.py)**
+   - PDF report filenames: `Fertique_Report_*.pdf`
+   - Default company name: PT Fertique Indonesia
+   - Referral codes: FERTIQUE2024
+   - Contact email: support@fertique-ai.com
+   - Website: www.fertique-ai.com
+   - Share link: fertique-ai.replit.app
+
+2. **PWA Components (Progressive Web App)**
+   - Service worker cache names: fertique-ai-v1.0.0, fertique-runtime-v1
+   - Push notification tags: fertique-notification
+   - Notification titles: "Fertique AI"
+   - Install prompts: "Install Fertique AI untuk akses lebih cepat!"
+   - Console log messages updated
+
+3. **Deployment Documentation**
+   - PLAYSTORE_DEPLOYMENT_GUIDE.md: Complete rebranding
+   - Package ID: com.fertique.ai
+   - App descriptions and metadata updated
+   - Contact information updated throughout
+
+4. **Visual Branding**
+   - Fertique AI logo displayed in sidebar (`attached_assets/logo-fertique_1761315091092.jpg`)
+   - Professional 3D stock images replaced all emoji icons (11 total)
+   - Sector icons: Agriculture, Livestock, Fisheries, Forestry, Horticulture
+   - Menu icons: Dashboard, Market, Analytics, Learning, Consultation, Community
+
+5. **Technical Improvements**
+   - Fixed Streamlit deprecation warnings: `use_container_width=True` → `width='stretch'`
+   - All image displays optimized for Streamlit 1.40+
+
+### Previous UI/UX Improvements
 1. **Redesigned Premium Subscription Cards**
    - Modern card layout with professional appearance
    - Color-coded borders (gray for Free, blue for Pro, gold for Enterprise)

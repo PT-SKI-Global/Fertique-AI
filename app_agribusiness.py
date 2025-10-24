@@ -633,10 +633,10 @@ if menu == "🏠 Beranda":
     
     for i, (sector, desc) in enumerate(sectors_info):
         with cols[i]:
-            st.image(SECTOR_ICONS[sector], use_container_width=True)
+            st.image(SECTOR_ICONS[sector], width='stretch')
             st.markdown(f"<h4 style='text-align: center; margin-top: -10px;'>{sector}</h4>", unsafe_allow_html=True)
             st.markdown(f"<p style='text-align: center; color: #666; font-size: 14px;'>{desc}</p>", unsafe_allow_html=True)
-            if st.button(f"Lihat {sector}", key=f"sector_{i}", use_container_width=True):
+            if st.button(f"Lihat {sector}", key=f"sector_{i}", width='stretch'):
                 st.session_state.selected_sector = sector
                 st.rerun()
 
@@ -708,7 +708,7 @@ elif menu == "💎 Premium Features":
             if plan_id != current_plan:
                 button_color = "#2E7D32" if plan_id != 'free' else "#757575"
                 button_text = f"🚀 {'Upgrade' if plan_id != 'free' else 'Downgrade'} ke {plan_details['name']}"
-                if st.button(button_text, key=f"upgrade_{plan_id}", use_container_width=True):
+                if st.button(button_text, key=f"upgrade_{plan_id}", width='stretch'):
                     PremiumSubscription.set_user_plan(plan_id)
                     st.success(f"✅ Berhasil {'upgrade' if plan_id != 'free' else 'switch'} ke paket {plan_details['name']}!")
                     st.balloons()
@@ -742,7 +742,7 @@ elif menu == "💎 Premium Features":
             
             months = st.slider("Prediksi untuk berapa bulan ke depan?", 1, 12, 3)
             
-            if st.button("🔮 Generate Prediksi Advanced", use_container_width=True):
+            if st.button("🔮 Generate Prediksi Advanced", width='stretch'):
                 with st.spinner("Menganalisis data historis dan generating predictions..."):
                     sample_data = pd.DataFrame({
                         'date': pd.date_range(end=datetime.now(), periods=90, freq='D'),
@@ -798,7 +798,7 @@ elif menu == "💎 Premium Features":
                             height=400
                         )
                         
-                        st.plotly_chart(fig, use_container_width=True)
+                        st.plotly_chart(fig, width='stretch')
                     
                     with col2:
                         st.markdown("### 📊 Metrik Prediksi")
@@ -822,7 +822,7 @@ elif menu == "💎 Premium Features":
                     
                     st.dataframe(
                         display_predictions[['date', 'predicted_price', 'confidence_low', 'confidence_high', 'confidence_level', 'recommendation']],
-                        use_container_width=True,
+                        width='stretch',
                         hide_index=True
                     )
     
@@ -848,7 +848,7 @@ elif menu == "💎 Premium Features":
                 )
                 threshold = st.number_input("Nilai Threshold", min_value=0, value=50000, step=1000)
                 
-                if st.button("🔔 Aktifkan Alert", use_container_width=True):
+                if st.button("🔔 Aktifkan Alert", width='stretch'):
                     if phone:
                         alert = SMSAlertSystem.setup_alert(phone, alert_commodity, alert_type, threshold)
                         st.success(f"✅ Alert berhasil dibuat! ID: #{alert['id']}")
@@ -898,7 +898,7 @@ elif menu == "💎 Premium Features":
                     ["Analisis Bisnis Komprehensif", "Laporan Produksi", "Laporan Keuangan", "Market Analysis"]
                 )
                 
-                if st.button("📄 Generate PDF Report", use_container_width=True):
+                if st.button("📄 Generate PDF Report", width='stretch'):
                     with st.spinner("Generating professional report..."):
                         sample_data = pd.DataFrame({
                             'date': pd.date_range(end=datetime.now(), periods=30, freq='D'),
@@ -918,7 +918,7 @@ elif menu == "💎 Premium Features":
                             data=pdf_buffer,
                             file_name=f"Fertique_Report_{datetime.now().strftime('%Y%m%d')}.pdf",
                             mime="application/pdf",
-                            use_container_width=True
+                            width='stretch'
                         )
             
             with col2:
@@ -965,7 +965,7 @@ elif menu == "💎 Premium Features":
                     height=150
                 )
                 
-                if st.button("🚀 Konsultasi dengan AI Expert", use_container_width=True):
+                if st.button("🚀 Konsultasi dengan AI Expert", width='stretch'):
                     if question:
                         with st.spinner("AI Expert sedang menganalisis pertanyaan Anda..."):
                             import time
@@ -1070,7 +1070,7 @@ elif menu == "🌾 Sektor Agribusiness":
                 f'Produksi {selected_sector}',
                 orientation='h'
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
         
         with col2:
             st.markdown("### 🗺️ Distribusi Geografis Produksi")
@@ -1087,7 +1087,7 @@ elif menu == "🌾 Sektor Agribusiness":
                 f'Nilai Produksi {selected_sector}',
                 'Greens'
             )
-            st.plotly_chart(fig_map, use_container_width=True)
+            st.plotly_chart(fig_map, width='stretch')
     
     with tab2:
         st.markdown("### 📦 Stok dan Kebutuhan Input")
@@ -1104,7 +1104,7 @@ elif menu == "🌾 Sektor Agribusiness":
                         orientation='h',
                         color='stok',
                         color_continuous_scale='Greens')
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
         
         with col2:
             st.markdown("#### Distribusi Stok per Jenis Input")
@@ -1116,7 +1116,7 @@ elif menu == "🌾 Sektor Agribusiness":
                 'jenis_input',
                 f'Komposisi Stok {selected_sector}'
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
         
         st.markdown("---")
         st.markdown("#### 📋 Tabel Detail Stok per Wilayah")
@@ -1147,7 +1147,7 @@ elif menu == "🌾 Sektor Agribusiness":
                      color='sumber',
                      markers=True)
         fig.update_layout(height=400)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         
         col1, col2, col3 = st.columns(3)
         
@@ -1208,7 +1208,7 @@ elif menu == "💼 Dashboard SME":
             sme_by_sector.columns = ['sektor', 'jumlah']
             
             fig = create_pie_chart(sme_by_sector, 'jumlah', 'sektor', 'Jumlah SME per Sektor')
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
         
         with col2:
             st.markdown("### 💰 Total Omzet per Sektor")
@@ -1219,7 +1219,7 @@ elif menu == "💼 Dashboard SME":
                         title='Omzet Bulanan per Sektor',
                         color='omzet_bulanan',
                         color_continuous_scale='Viridis')
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
     
     with tab2:
         st.markdown("### 💰 Kalkulator ROI & Profitabilitas")
@@ -1275,7 +1275,7 @@ elif menu == "💼 Dashboard SME":
         fig.add_trace(go.Scatter(x=df_projection['Bulan'], y=df_projection['Profit'],
                                 name='Profit', mode='lines+markers', line=dict(color='#FFA726')))
         fig.update_layout(title='Proyeksi Omzet & Profit 12 Bulan', height=400)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with tab3:
         st.markdown("### 🏆 Ranking & Benchmark SME")
@@ -1320,7 +1320,7 @@ elif menu == "📊 Prediksi & Analisis":
                  title=f'Tren Permintaan {input_choice}',
                  markers=True)
     fig.update_layout(height=400)
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 elif menu == "🎮 Komunitas & Gamifikasi":
     st.title("🎮 Komunitas & Gamifikasi")
@@ -1362,7 +1362,7 @@ elif menu == "🎮 Komunitas & Gamifikasi":
         leaderboard_data['rank'] = ['🥇', '🥈', '🥉'] + ['🏅'] * 7
         leaderboard_data = leaderboard_data[['rank', 'nama_usaha', 'sektor', 'omzet_bulanan', 'profit_margin']]
         
-        st.dataframe(leaderboard_data, use_container_width=True)
+        st.dataframe(leaderboard_data, width='stretch')
     
     with tab2:
         st.markdown("### 💬 Community Forum")
@@ -1383,7 +1383,7 @@ elif menu == "🎮 Komunitas & Gamifikasi":
             </div>
             """, unsafe_allow_html=True)
         
-        if st.button("➕ Buat Topic Baru", use_container_width=True):
+        if st.button("➕ Buat Topic Baru", width='stretch'):
             st.text_area("Judul Topic", placeholder="Masukkan judul...")
             st.text_area("Isi Topic", placeholder="Tulis pertanyaan atau sharing Anda...", height=150)
             if st.button("📤 Post"):
@@ -1416,13 +1416,13 @@ elif menu == "🎮 Komunitas & Gamifikasi":
             
             share_text = "Saya menggunakan Fertique AI untuk optimasi bisnis agribusiness saya! Join sekarang dengan code FERTIQUE2024 🌾"
             
-            if st.button("📱 Share to WhatsApp", use_container_width=True):
+            if st.button("📱 Share to WhatsApp", width='stretch'):
                 st.success("Opening WhatsApp...")
             
-            if st.button("📘 Share to Facebook", use_container_width=True):
+            if st.button("📘 Share to Facebook", width='stretch'):
                 st.success("Opening Facebook...")
             
-            if st.button("🐦 Share to Twitter", use_container_width=True):
+            if st.button("🐦 Share to Twitter", width='stretch'):
                 st.success("Opening Twitter...")
 
 else:  # Tentang
@@ -1509,7 +1509,7 @@ else:  # Tentang
     **Status**: ✅ Production Ready - Mobile Optimized
     """)
     
-    if st.button("🚀 Deploy ke Production", use_container_width=True):
+    if st.button("🚀 Deploy ke Production", width='stretch'):
         st.balloons()
         st.success("✅ Ready untuk di-publish! Gunakan Replit Deployment untuk go live.")
         st.info("📱 Aplikasi sudah dioptimasi untuk Android, iOS, dan Browser")
