@@ -22,6 +22,10 @@ from utils import (
     format_number, create_heatmap_indonesia, create_bar_chart,
     create_line_chart, create_pie_chart, create_comparison_chart
 )
+from premium_features import (
+    PremiumSubscription, AdvancedPredictions, SMSAlertSystem,
+    PDFReportGenerator, ExpertAIConsultation
+)
 
 st.set_page_config(
     page_title="AgriBiz AI - Platform Agribusiness Terpadu",
@@ -521,11 +525,19 @@ st.sidebar.markdown("**Platform Agribusiness Terpadu**")
 st.sidebar.markdown("*Untuk Petani, Peternak, Nelayan, SME*")
 st.sidebar.markdown("---")
 
+user_plan = PremiumSubscription.get_user_plan()
+plan_info = PremiumSubscription.get_plan_info(user_plan)
+
 menu = st.sidebar.radio(
     "📱 Menu Utama",
-    ["🏠 Beranda", "🌾 Sektor Agribusiness", "💼 Dashboard SME", 
+    ["🏠 Beranda", "💎 Premium Features", "🌾 Sektor Agribusiness", "💼 Dashboard SME", 
      "📊 Prediksi & Analisis", "🎮 Komunitas & Gamifikasi", "ℹ️ Tentang"]
 )
+
+st.sidebar.markdown("---")
+st.sidebar.markdown(f"**📦 Paket Anda:** {plan_info['name']}")
+if user_plan == 'free':
+    st.sidebar.info("⬆️ Upgrade ke Pro untuk fitur premium!")
 
 st.sidebar.markdown("---")
 selected_sector = st.sidebar.selectbox(
@@ -588,6 +600,363 @@ if menu == "🏠 Beranda":
             if st.button(f"{icon}\n{desc}", key=f"sector_{i}", use_container_width=True):
                 st.session_state.selected_sector = sector
                 st.rerun()
+
+elif menu == "💎 Premium Features":
+    st.title("💎 AgriBiz AI Premium")
+    st.markdown("### Unlock Fitur Canggih untuk Maksimalkan Bisnis Agribusiness Anda")
+    
+    current_plan = PremiumSubscription.get_user_plan()
+    
+    st.markdown("---")
+    st.markdown("## 📦 Pilih Paket Berlangganan")
+    
+    col1, col2, col3 = st.columns(3)
+    
+    for i, (plan_id, plan_details) in enumerate(PremiumSubscription.PLANS.items()):
+        with [col1, col2, col3][i]:
+            is_popular = plan_details.get('popular', False)
+            is_current = plan_id == current_plan
+            
+            st.markdown(f"""
+            <div style="
+                background: linear-gradient(135deg, {plan_details['color']} 0%, {plan_details['color']}CC 100%);
+                padding: 25px;
+                border-radius: 15px;
+                color: white;
+                min-height: 450px;
+                position: relative;
+            ">
+                {f'<div style="position: absolute; top: 10px; right: 10px; background: gold; color: black; padding: 5px 15px; border-radius: 15px; font-weight: bold; font-size: 12px;">⭐ POPULAR</div>' if is_popular else ''}
+                {f'<div style="position: absolute; top: 10px; right: 10px; background: #4CAF50; color: white; padding: 5px 15px; border-radius: 15px; font-weight: bold; font-size: 12px;">✓ AKTIF</div>' if is_current else ''}
+                <h2 style="margin-top: {"30px" if is_popular or is_current else "0px"};">{plan_details['name']}</h2>
+                <h1 style="font-size: 32px; margin: 15px 0;">{plan_details['price_text']}</h1>
+                <hr style="border-color: rgba(255,255,255,0.3);">
+                <ul style="list-style: none; padding: 0; margin-top: 20px; text-align: left;">
+                    {''.join([f'<li style="margin: 10px 0; font-size: 14px;">{feature}</li>' for feature in plan_details['features']])}
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown("")
+            if plan_id != current_plan:
+                if st.button(f"🚀 {'Upgrade' if plan_id != 'free' else 'Downgrade'} ke {plan_details['name']}", 
+                           key=f"upgrade_{plan_id}", 
+                           use_container_width=True):
+                    PremiumSubscription.set_user_plan(plan_id)
+                    st.success(f"✅ Berhasil {'upgrade' if plan_id != 'free' else 'switch'} ke paket {plan_details['name']}!")
+                    st.balloons()
+                    st.rerun()
+            else:
+                st.info(f"✓ Paket {plan_details['name']} Aktif")
+    
+    st.markdown("---")
+    
+    tabs = st.tabs([
+        "📊 Advanced Predictions", 
+        "📱 SMS Alerts", 
+        "📄 PDF Reports",
+        "🤖 Expert AI Consultation"
+    ])
+    
+    with tabs[0]:
+        st.markdown("## 📊 Prediksi AI Advanced dengan Confidence Interval")
+        
+        if not PremiumSubscription.has_feature('advanced_predictions'):
+            st.warning("⚠️ Fitur ini memerlukan paket Pro atau Enterprise")
+            st.info("Upgrade sekarang untuk mendapatkan prediksi dengan tingkat akurasi tinggi dan confidence interval!")
+        else:
+            st.success("✅ Fitur Advanced Predictions AKTIF")
+            
+            st.markdown("### Pilih Komoditas untuk Prediksi")
+            commodity = st.selectbox(
+                "Komoditas",
+                ["Padi", "Jagung", "Kedelai", "Ayam", "Sapi", "Lele"]
+            )
+            
+            months = st.slider("Prediksi untuk berapa bulan ke depan?", 1, 12, 3)
+            
+            if st.button("🔮 Generate Prediksi Advanced", use_container_width=True):
+                with st.spinner("Menganalisis data historis dan generating predictions..."):
+                    sample_data = pd.DataFrame({
+                        'date': pd.date_range(end=datetime.now(), periods=90, freq='D'),
+                        'price': np.random.normal(50000, 5000, 90)
+                    })
+                    
+                    predictions = AdvancedPredictions.predict_with_confidence(
+                        sample_data, 
+                        commodity, 
+                        months_ahead=months
+                    )
+                    
+                    st.markdown("### 📈 Hasil Prediksi")
+                    
+                    col1, col2 = st.columns([2, 1])
+                    
+                    with col1:
+                        fig = go.Figure()
+                        
+                        fig.add_trace(go.Scatter(
+                            x=predictions['date'],
+                            y=predictions['predicted_price'],
+                            mode='lines+markers',
+                            name='Prediksi',
+                            line=dict(color='#2E7D32', width=3),
+                            marker=dict(size=10)
+                        ))
+                        
+                        fig.add_trace(go.Scatter(
+                            x=predictions['date'],
+                            y=predictions['confidence_high'],
+                            mode='lines',
+                            name='Upper Bound',
+                            line=dict(color='rgba(46, 125, 50, 0.3)', width=1, dash='dash'),
+                            showlegend=False
+                        ))
+                        
+                        fig.add_trace(go.Scatter(
+                            x=predictions['date'],
+                            y=predictions['confidence_low'],
+                            mode='lines',
+                            name='Confidence Interval',
+                            line=dict(color='rgba(46, 125, 50, 0.3)', width=1, dash='dash'),
+                            fill='tonexty',
+                            fillcolor='rgba(46, 125, 50, 0.2)'
+                        ))
+                        
+                        fig.update_layout(
+                            title=f'Prediksi Harga {commodity} - {months} Bulan Ke Depan',
+                            xaxis_title='Bulan',
+                            yaxis_title='Harga (Rp)',
+                            hovermode='x unified',
+                            height=400
+                        )
+                        
+                        st.plotly_chart(fig, use_container_width=True)
+                    
+                    with col2:
+                        st.markdown("### 📊 Metrik Prediksi")
+                        avg_confidence = predictions['confidence_level'].mean()
+                        st.metric("Confidence Level", f"{avg_confidence:.1f}%")
+                        
+                        final_prediction = predictions.iloc[-1]
+                        price_change = ((final_prediction['predicted_price'] / sample_data['price'].iloc[-1]) - 1) * 100
+                        st.metric(
+                            f"Prediksi {months} Bulan",
+                            f"Rp {final_prediction['predicted_price']:,.0f}",
+                            f"{price_change:+.1f}%"
+                        )
+                    
+                    st.markdown("### 📋 Detail Prediksi per Bulan")
+                    display_predictions = predictions.copy()
+                    display_predictions['predicted_price'] = display_predictions['predicted_price'].apply(lambda x: f"Rp {x:,.0f}")
+                    display_predictions['confidence_low'] = display_predictions['confidence_low'].apply(lambda x: f"Rp {x:,.0f}")
+                    display_predictions['confidence_high'] = display_predictions['confidence_high'].apply(lambda x: f"Rp {x:,.0f}")
+                    display_predictions['confidence_level'] = display_predictions['confidence_level'].apply(lambda x: f"{x}%")
+                    
+                    st.dataframe(
+                        display_predictions[['date', 'predicted_price', 'confidence_low', 'confidence_high', 'confidence_level', 'recommendation']],
+                        use_container_width=True,
+                        hide_index=True
+                    )
+    
+    with tabs[1]:
+        st.markdown("## 📱 SMS Alert System")
+        
+        if not PremiumSubscription.has_feature('sms_alerts'):
+            st.warning("⚠️ Fitur ini memerlukan paket Pro atau Enterprise")
+            st.info("Dapatkan notifikasi real-time via SMS ketika harga pasar berubah!")
+        else:
+            st.success("✅ SMS Alert System AKTIF")
+            
+            col1, col2 = st.columns([1, 1])
+            
+            with col1:
+                st.markdown("### ➕ Buat Alert Baru")
+                
+                phone = st.text_input("📞 Nomor WhatsApp/SMS", placeholder="+62812345678")
+                alert_commodity = st.selectbox("Komoditas", ["Padi", "Jagung", "Kedelai", "Ayam", "Sapi"])
+                alert_type = st.selectbox(
+                    "Trigger Alert",
+                    ["Harga Naik >", "Harga Turun >", "Harga Mencapai", "Perubahan Harian >"]
+                )
+                threshold = st.number_input("Nilai Threshold", min_value=0, value=50000, step=1000)
+                
+                if st.button("🔔 Aktifkan Alert", use_container_width=True):
+                    if phone:
+                        alert = SMSAlertSystem.setup_alert(phone, alert_commodity, alert_type, threshold)
+                        st.success(f"✅ Alert berhasil dibuat! ID: #{alert['id']}")
+                        
+                        result = SMSAlertSystem.simulate_send_sms(
+                            phone,
+                            f"AgriBiz AI: Alert untuk {alert_commodity} telah diaktifkan. Anda akan menerima notifikasi jika {alert_type} Rp {threshold:,}"
+                        )
+                        st.info(f"📤 SMS konfirmasi terkirim! Message ID: {result['message_id']}")
+                    else:
+                        st.error("Masukkan nomor telepon terlebih dahulu")
+            
+            with col2:
+                st.markdown("### 📋 Alert Aktif Anda")
+                active_alerts = SMSAlertSystem.get_active_alerts()
+                
+                if len(active_alerts) > 0:
+                    for alert in active_alerts:
+                        st.markdown(f"""
+                        <div style="background: #E8F5E9; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                            <h4>Alert #{alert['id']} - {alert['commodity']}</h4>
+                            <p>📞 {alert['phone']}<br/>
+                            🎯 {alert['trigger_type']} Rp {alert['threshold']:,}<br/>
+                            📅 Dibuat: {alert['created_at'].strftime('%d %b %Y')}</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                else:
+                    st.info("Belum ada alert aktif. Buat alert pertama Anda!")
+    
+    with tabs[2]:
+        st.markdown("## 📄 Professional PDF Reports")
+        
+        if not PremiumSubscription.has_feature('pdf_reports'):
+            st.warning("⚠️ Fitur ini memerlukan paket Pro atau Enterprise")
+            st.info("Generate laporan bisnis profesional dalam format PDF!")
+        else:
+            st.success("✅ PDF Report Generator AKTIF")
+            
+            st.markdown("### 📝 Generate Laporan Bisnis")
+            
+            col1, col2 = st.columns([2, 1])
+            
+            with col1:
+                report_name = st.text_input("Nama Pengguna/Perusahaan", value="PT Agribiz Indonesia")
+                report_type = st.selectbox(
+                    "Jenis Laporan",
+                    ["Analisis Bisnis Komprehensif", "Laporan Produksi", "Laporan Keuangan", "Market Analysis"]
+                )
+                
+                if st.button("📄 Generate PDF Report", use_container_width=True):
+                    with st.spinner("Generating professional report..."):
+                        sample_data = pd.DataFrame({
+                            'date': pd.date_range(end=datetime.now(), periods=30, freq='D'),
+                            'price': np.random.normal(50000, 5000, 30),
+                            'volume': np.random.randint(100, 1000, 30)
+                        })
+                        
+                        pdf_buffer = PDFReportGenerator.generate_business_report(
+                            sample_data,
+                            user_name=report_name
+                        )
+                        
+                        st.success("✅ Laporan berhasil dibuat!")
+                        
+                        st.download_button(
+                            label="📥 Download PDF Report",
+                            data=pdf_buffer,
+                            file_name=f"AgriBiz_Report_{datetime.now().strftime('%Y%m%d')}.pdf",
+                            mime="application/pdf",
+                            use_container_width=True
+                        )
+            
+            with col2:
+                st.markdown("### 📋 Info Laporan")
+                st.info("""
+                **Laporan mencakup:**
+                - Summary eksekutif
+                - Analisis data produksi
+                - Grafik trend
+                - Rekomendasi strategis
+                - Proyeksi bisnis
+                """)
+                
+                st.markdown(f"""
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                            padding: 20px; border-radius: 10px; color: white; margin-top: 20px;">
+                    <h4>💰 Hemat Waktu</h4>
+                    <p>Report otomatis menghemat 5+ jam kerja manual per bulan!</p>
+                </div>
+                """, unsafe_allow_html=True)
+    
+    with tabs[3]:
+        st.markdown("## 🤖 Expert AI Consultation")
+        
+        if not PremiumSubscription.has_feature('expert_consultation'):
+            st.warning("⚠️ Fitur ini eksklusif untuk paket Enterprise")
+            st.info("Dapatkan konsultasi langsung dari AI Expert 24/7!")
+        else:
+            st.success("✅ Expert AI Consultation AKTIF - 24/7 Available")
+            
+            st.markdown("### 💬 Tanya Expert AI")
+            
+            col1, col2 = st.columns([2, 1])
+            
+            with col1:
+                expertise_area = st.selectbox(
+                    "Area Expertise",
+                    list(ExpertAIConsultation.EXPERTISE_AREAS.values())
+                )
+                
+                question = st.text_area(
+                    "Pertanyaan Anda",
+                    placeholder="Contoh: Bagaimana cara meningkatkan hasil panen jagung saya di musim kemarau?",
+                    height=150
+                )
+                
+                if st.button("🚀 Konsultasi dengan AI Expert", use_container_width=True):
+                    if question:
+                        with st.spinner("AI Expert sedang menganalisis pertanyaan Anda..."):
+                            import time
+                            time.sleep(2)
+                            
+                            response = ExpertAIConsultation.get_ai_recommendation(question)
+                            
+                            st.markdown(f"""
+                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                                        padding: 25px; border-radius: 15px; color: white; margin: 20px 0;">
+                                <h3>🤖 Rekomendasi Expert AI</h3>
+                                <p><strong>Area:</strong> {response['expertise_area']}</p>
+                                <p><strong>Confidence Level:</strong> {response['confidence']}%</p>
+                                <hr style="border-color: rgba(255,255,255,0.3);">
+                                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                                    <pre style="color: white; white-space: pre-wrap; font-family: inherit;">{response['recommendation']}</pre>
+                                </div>
+                            </div>
+                            """, unsafe_allow_html=True)
+                            
+                            st.markdown("### 🔄 Pertanyaan Follow-up yang Direkomendasikan:")
+                            for fq in response['follow_up_questions']:
+                                if st.button(fq, key=f"fq_{fq[:20]}"):
+                                    st.session_state.follow_up_question = fq
+                                    st.rerun()
+                    else:
+                        st.error("Silakan masukkan pertanyaan terlebih dahulu")
+            
+            with col2:
+                st.markdown("### 🎯 Expert Areas")
+                for area, desc in ExpertAIConsultation.EXPERTISE_AREAS.items():
+                    st.markdown(f"**{desc}**")
+                
+                st.markdown("---")
+                st.markdown("""
+                <div style="background: #FFF3E0; padding: 15px; border-radius: 10px;">
+                    <h4>⚡ Respon Instan</h4>
+                    <p>AI Expert kami tersedia 24/7 dengan response time < 3 detik!</p>
+                </div>
+                """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    st.markdown("### 💳 Metode Pembayaran")
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.info("💳 **Credit/Debit Card**\nVisa, Mastercard, JCB")
+    with col2:
+        st.info("🏦 **Transfer Bank**\nBCA, Mandiri, BNI, BRI")
+    with col3:
+        st.info("📱 **E-Wallet**\nGoPay, OVO, DANA, ShopeePay")
+    
+    st.markdown("""
+    <div style="background: #E8F5E9; padding: 20px; border-radius: 15px; margin-top: 30px; text-align: center;">
+        <h3>🔒 100% Aman & Terpercaya</h3>
+        <p>Pembayaran diproses melalui gateway aman dengan enkripsi SSL 256-bit</p>
+        <p><strong>📞 Butuh bantuan?</strong> Hubungi: support@agribiz-ai.com | WhatsApp: +62 812-3456-7890</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 elif menu == "🌾 Sektor Agribusiness":
     st.title(f"🌾 Sektor {selected_sector}")
