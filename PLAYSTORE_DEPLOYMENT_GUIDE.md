@@ -123,14 +123,14 @@ bubblewrap build --skipPwaValidation
 - **App or game**: App
 - **Free or paid**: Free
 - **Category**: Business / Productivity
-- **Tags**: agriculture, farming, business, SME, AI, predictions
+- **Tags**: agriculture, farming, business, enterprise, AI, predictions
 
 #### B. Store Listing
 Isi informasi berikut:
 
 **Short description** (max 80 characters):
 ```
-Platform AI untuk Petani, Peternak, Nelayan & SME Indonesia
+Platform AI untuk Petani, Peternak, Nelayan & Pelaku Usaha Indonesia
 ```
 
 **Full description** (max 4000 characters):
@@ -144,7 +144,7 @@ Solusi digital lengkap untuk seluruh ekosistem agribusiness di Indonesia!
 • Petani Hortikultura - Optimasi hasil sayur & buah
 • Peternak - Manajemen pakan & kesehatan ternak
 • Petani Ikan - Prediksi pakan & kualitas air kolam
-• SME Owner - Analisis bisnis & profitabilitas
+• Pemilik Usaha - Analisis bisnis & profitabilitas
 
 🤖 FITUR UNGGULAN:
 ✓ AI Prediction - Prediksi kebutuhan input berbasis machine learning
@@ -186,7 +186,7 @@ Capture dari:
 1. Halaman Beranda (Dashboard)
 2. Sektor Agribusiness page
 3. Prediksi & Analisis page
-4. Dashboard SME
+4. Dashboard Bisnis
 5. Community & Gamifikasi
 
 **Feature graphic** (required):
@@ -223,7 +223,7 @@ Features:
 ✓ AI-powered predictions
 ✓ Voice input for hands-free operation
 ✓ Real-time market prices
-✓ SME business analytics
+✓ Business analytics
 ✓ Community & gamification
 ✓ Optimized for mobile devices
 ```
@@ -279,7 +279,7 @@ https://your-domain.com/.well-known/assetlinks.json
 **Keywords yang baik**:
 - agribusiness, pertanian, peternakan, perikanan
 - pupuk, pakan, benih, pestisida
-- SME, UMKM, usaha kecil
+- bisnis, UMKM, usaha kecil, korporat, enterprise
 - AI, machine learning, prediksi
 - Indonesia, petani, peternak, nelayan
 

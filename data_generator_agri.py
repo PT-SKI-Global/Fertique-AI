@@ -193,11 +193,11 @@ class AgribusinessDataGenerator:
         
         return pd.DataFrame(data)
     
-    def generate_sme_profile(self, num_smes=50):
-        """Generate SME business profiles"""
+    def generate_business_profile(self, num_business=50):
+        """Generate Business profiles"""
         data = []
         
-        for i in range(num_smes):
+        for i in range(num_business):
             sector = np.random.choice(list(self.sectors.keys()))
             prov = np.random.choice(self.provinsi)
             sector_info = self.sectors[sector]
@@ -207,7 +207,7 @@ class AgribusinessDataGenerator:
             profit = omzet * np.random.uniform(0.1, 0.35)
             
             data.append({
-                'id_sme': f'SME{i+1:04d}',
+                'id_business': f'BUS{i+1:04d}',
                 'nama_usaha': f'{sector_info["komoditas"][0]} {prov[:4]}',
                 'provinsi': prov,
                 'sektor': sector,

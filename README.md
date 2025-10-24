@@ -8,7 +8,7 @@
 
 ## 🎯 Overview
 
-**AgriBiz AI** adalah platform agribusiness terpadu berbasis AI yang memberdayakan petani, peternak, petani ikan, dan SME di Indonesia dengan teknologi prediksi, analisis bisnis, dan community features untuk meningkatkan produktivitas dan profitabilitas 30-50%.
+**AgriBiz AI** adalah platform agribusiness terpadu berbasis AI yang memberdayakan petani, peternak, petani ikan, dan pelaku usaha (dari UMKM hingga korporat) di Indonesia dengan teknologi prediksi, analisis bisnis, dan community features untuk meningkatkan produktivitas dan profitabilitas 30-50%.
 
 ### 🌟 Key Features
 
@@ -19,10 +19,10 @@
 - 📊 **Real-time Analytics**: Dashboard monitoring produksi dan distribusi
 - 📱 **Mobile Optimized**: Akses via Android, iOS, dan browser
 
-#### Untuk SME Owner:
+#### Untuk Pemilik Usaha:
 - 💰 **Business Analytics**: ROI calculator, profit tracking, cashflow analysis
 - 📈 **Market Intelligence**: Tren harga pasar real-time
-- 🏆 **Benchmarking**: Compare performance dengan SME lain
+- 🏆 **Benchmarking**: Compare performance dengan pelaku usaha lain
 - 📊 **Financial Planning**: Tools untuk perencanaan keuangan bisnis
 
 #### Community & Viral Features:
@@ -125,7 +125,7 @@ agribiz-ai/
 - Stok dan distribusi input
 - Trend harga pasar real-time
 
-### 2. Dashboard SME
+### 2. Dashboard Bisnis
 - Business analytics & KPIs
 - ROI calculator
 - Profit margin analysis
@@ -168,7 +168,7 @@ agribiz-ai/
 4. Bandingkan dengan peternak lain
 5. Dapatkan tips dari community
 
-### SME Owner Hortikultura:
+### Pemilik Usaha Hortikultura:
 1. Dashboard business analytics
 2. Track profit margin bulanan
 3. Trend harga sayur di pasar
@@ -229,7 +229,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ### Phase 1 (✅ Completed - October 2025)
 - [x] Multi-sector support (Agriculture, Horticulture, Livestock, Fishery)
 - [x] Voice input feature
-- [x] SME Dashboard with business analytics
+- [x] Business Dashboard with business analytics
 - [x] Community & gamification features
 - [x] Mobile-optimized UI
 - [x] Social sharing & referral system
@@ -258,7 +258,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - Aktifkan notifikasi untuk weather alerts
 - Join community untuk tips & best practices
 
-### For SME Owners:
+### For Business Owners:
 - Update data produksi secara rutin
 - Gunakan ROI calculator untuk planning
 - Monitor benchmark dengan competitor

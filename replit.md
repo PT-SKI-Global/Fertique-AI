@@ -1,7 +1,7 @@
 # Fertique AI - Platform Agribusiness Terpadu
 
 ## Overview
-Fertique AI is a comprehensive agribusiness platform for Indonesian farmers, livestock owners, fisheries, and SMEs. It provides AI-based predictions for fertilizer needs, production tracking, market price monitoring, and business analytics. The platform is mobile-optimized for Android/iOS and ready for Google Play Store deployment, with premium subscription features.
+Fertique AI is a comprehensive agribusiness platform for Indonesian farmers, livestock owners, fisheries, and businesses (SMEs to corporate). It provides AI-based predictions for fertilizer needs, production tracking, market price monitoring, and business analytics. The platform is mobile-optimized for Android/iOS and ready for Google Play Store deployment, with premium subscription features.
 
 The system integrates multiple data sources to predict fertilizer needs for various crops and fertilizer types across Indonesian provinces. It includes a premium subscription system (Free, Pro Rp 99k/month, Enterprise Rp 299k/month) offering advanced features like confidence interval predictions, SMS alerts, professional PDF reports, and expert AI consultation.
 
@@ -46,6 +46,17 @@ Preferred communication style: Simple, everyday language.
 6. **Copyright Update**
    - Changed footer copyright from "🌾 Fertique AI © 2025" to "copyright © 2025 PT.Sentra Karya Integrasi Global"
    - Applied to both app_agribusiness.py and app.py
+
+7. **Terminology Update: SME → Pelaku Usaha**
+   - Replaced all "SME" references with more inclusive terms for corporate use
+   - "SME" → "Pelaku Usaha" / "Bisnis" 
+   - "SME Owner" → "Pemilik Usaha"
+   - "Dashboard SME" → "Dashboard Bisnis"
+   - Applied to: app_agribusiness.py, data_generator_agri.py, manifest.json, static/manifest.json, PLAYSTORE_DEPLOYMENT_GUIDE.md, README.md
+   - Updated PWA shortcuts and app descriptions
+   - Function names updated: `generate_sme_profile()` → `generate_business_profile()`
+   - Variable names updated: `sme_data` → `business_data`
+   - Now inclusive for all business sizes: UMKM to corporate enterprises
 
 ### Previous UI/UX Improvements
 1. **Redesigned Premium Subscription Cards**

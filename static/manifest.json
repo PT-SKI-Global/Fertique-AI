@@ -1,7 +1,7 @@
 {
   "name": "Fertique AI - Platform Agribusiness Terpadu",
   "short_name": "Fertique AI",
-  "description": "Platform Agribusiness Terpadu Berbasis AI untuk Petani, Peternak, Nelayan & SME Indonesia",
+  "description": "Platform Agribusiness Terpadu Berbasis AI untuk Petani, Peternak, Nelayan & Pelaku Usaha Indonesia",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F1F8E9",
@@ -77,9 +77,9 @@
   ],
   "shortcuts": [
     {
-      "name": "Dashboard SME",
+      "name": "Dashboard Bisnis",
       "short_name": "Dashboard",
-      "description": "Akses cepat ke Dashboard SME",
+      "description": "Akses cepat ke Dashboard Bisnis",
       "url": "/?menu=dashboard",
       "icons": [{ "src": "/static/icon-96x96.png", "sizes": "96x96" }]
     },

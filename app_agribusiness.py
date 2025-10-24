@@ -473,9 +473,9 @@ def get_sector_data(sector, _generator):
     }
 
 @st.cache_data
-def get_sme_data(_generator):
-    """Load SME profiles"""
-    return _generator.generate_sme_profile(100)
+def get_business_data(_generator):
+    """Load Business profiles"""
+    return _generator.generate_business_profile(100)
 
 def voice_to_text():
     """Voice input feature for hands-free operation"""
@@ -531,7 +531,7 @@ def _build_feature_list(features, font_size, line_height, letter_spacing, dyslex
     return ''.join(html_parts)
 
 generator = load_agri_data()
-sme_data = get_sme_data(generator)
+business_data = get_business_data(generator)
 
 SECTOR_ICONS = {
     'Pertanian': 'attached_assets/stock_images/3d_wheat_grain_rice__a73baeb5.jpg',
@@ -543,7 +543,7 @@ SECTOR_ICONS = {
 st.sidebar.image("attached_assets/logo-fertique_1761315091092.jpg", width=120)
 st.sidebar.title("Fertique AI")
 st.sidebar.markdown("**Platform Agribusiness Terpadu**")
-st.sidebar.markdown("*Untuk Petani, Peternak, Nelayan, SME*")
+st.sidebar.markdown("*Untuk Petani, Peternak, Nelayan & Pelaku Usaha*")
 st.sidebar.markdown("---")
 
 user_plan = PremiumSubscription.get_user_plan()
@@ -551,7 +551,7 @@ plan_info = PremiumSubscription.get_plan_info(user_plan)
 
 menu = st.sidebar.radio(
     "📱 Menu Utama",
-    ["🏠 Beranda", "💎 Premium Features", "🌾 Sektor Agribusiness", "💼 Dashboard SME", 
+    ["🏠 Beranda", "💎 Premium Features", "🌾 Sektor Agribusiness", "💼 Dashboard Bisnis", 
      "📊 Prediksi & Analisis", "🎮 Komunitas & Gamifikasi", "ℹ️ Tentang"]
 )
 
@@ -594,7 +594,7 @@ if menu == "🏠 Beranda":
         - 🥬 **Petani Hortikultura** - Optimasi hasil sayur & buah
         - 🐄 **Peternak** - Manajemen pakan & kesehatan ternak
         - 🐟 **Petani Ikan** - Prediksi pakan & kualitas air
-        - 💼 **SME Owner** - Analisis bisnis & profitabilitas
+        - 💼 **Pemilik Usaha** - Analisis bisnis & profitabilitas
         """)
         
         st.markdown("### 🎯 Fitur Unggulan:")
@@ -612,7 +612,7 @@ if menu == "🏠 Beranda":
     
     with col2:
         st.markdown("### 📊 Statistik Platform")
-        st.metric("Total Pengguna SME", "10,000+", "+25%")
+        st.metric("Total Pelaku Usaha", "10,000+", "+25%")
         st.metric("Transaksi Bulanan", "Rp 50M", "+40%")
         st.metric("Rating Pengguna", "4.8/5.0", "⭐⭐⭐⭐")
         
@@ -1175,8 +1175,8 @@ elif menu == "🌾 Sektor Agribusiness":
                 st.success("✅ Data berhasil disimpan!")
                 st.balloons()
 
-elif menu == "💼 Dashboard SME":
-    st.title("💼 Dashboard SME Agribusiness")
+elif menu == "💼 Dashboard Bisnis":
+    st.title("💼 Dashboard Bisnis Agribusiness")
     st.markdown("### Analisis Bisnis untuk Pengusaha Agribusiness")
     
     tab1, tab2, tab3 = st.tabs(["📊 Overview Bisnis", "💰 Analisis Profitabilitas", "📈 Benchmark & Ranking"])
@@ -1184,13 +1184,13 @@ elif menu == "💼 Dashboard SME":
     with tab1:
         col1, col2, col3, col4 = st.columns(4)
         
-        total_sme = len(sme_data)
-        total_omzet = sme_data['omzet_bulanan'].sum()
-        avg_profit = sme_data['profit_margin'].mean()
-        total_karyawan = sme_data['jumlah_karyawan'].sum()
+        total_business = len(business_data)
+        total_omzet = business_data['omzet_bulanan'].sum()
+        avg_profit = business_data['profit_margin'].mean()
+        total_karyawan = business_data['jumlah_karyawan'].sum()
         
         with col1:
-            st.metric("Total SME", format_number(total_sme))
+            st.metric("Total Pelaku Usaha", format_number(total_business))
         with col2:
             st.metric("Omzet Total/Bulan", f"Rp {format_number(total_omzet)}")
         with col3:
@@ -1203,16 +1203,16 @@ elif menu == "💼 Dashboard SME":
         col1, col2 = st.columns(2)
         
         with col1:
-            st.markdown("### 📊 Distribusi SME per Sektor")
-            sme_by_sector = sme_data['sektor'].value_counts().reset_index()
-            sme_by_sector.columns = ['sektor', 'jumlah']
+            st.markdown("### 📊 Distribusi Pelaku Usaha per Sektor")
+            business_by_sector = business_data['sektor'].value_counts().reset_index()
+            business_by_sector.columns = ['sektor', 'jumlah']
             
-            fig = create_pie_chart(sme_by_sector, 'jumlah', 'sektor', 'Jumlah SME per Sektor')
+            fig = create_pie_chart(business_by_sector, 'jumlah', 'sektor', 'Jumlah Pelaku Usaha per Sektor')
             st.plotly_chart(fig, width='stretch')
         
         with col2:
             st.markdown("### 💰 Total Omzet per Sektor")
-            omzet_by_sector = sme_data.groupby('sektor')['omzet_bulanan'].sum().reset_index()
+            omzet_by_sector = business_data.groupby('sektor')['omzet_bulanan'].sum().reset_index()
             omzet_by_sector = omzet_by_sector.sort_values('omzet_bulanan', ascending=False)
             
             fig = px.bar(omzet_by_sector, x='sektor', y='omzet_bulanan',
@@ -1278,21 +1278,21 @@ elif menu == "💼 Dashboard SME":
         st.plotly_chart(fig, width='stretch')
     
     with tab3:
-        st.markdown("### 🏆 Ranking & Benchmark SME")
+        st.markdown("### 🏆 Ranking & Benchmark Pelaku Usaha")
         
         col1, col2 = st.columns(2)
         
         with col1:
-            st.markdown("#### Top 10 SME by Omzet")
-            top_sme = sme_data.nlargest(10, 'omzet_bulanan')[['nama_usaha', 'sektor', 'omzet_bulanan', 'profit_margin']]
-            top_sme['rank'] = range(1, 11)
-            top_sme = top_sme[['rank', 'nama_usaha', 'sektor', 'omzet_bulanan', 'profit_margin']]
+            st.markdown("#### Top 10 Pelaku Usaha by Omzet")
+            top_business = business_data.nlargest(10, 'omzet_bulanan')[['nama_usaha', 'sektor', 'omzet_bulanan', 'profit_margin']]
+            top_business['rank'] = range(1, 11)
+            top_business = top_business[['rank', 'nama_usaha', 'sektor', 'omzet_bulanan', 'profit_margin']]
             
-            AgGrid(top_sme, height=350, theme='streamlit')
+            AgGrid(top_business, height=350, theme='streamlit')
         
         with col2:
-            st.markdown("#### Top 10 SME by Profit Margin")
-            top_profit = sme_data.nlargest(10, 'profit_margin')[['nama_usaha', 'sektor', 'omzet_bulanan', 'profit_margin']]
+            st.markdown("#### Top 10 Pelaku Usaha by Profit Margin")
+            top_profit = business_data.nlargest(10, 'profit_margin')[['nama_usaha', 'sektor', 'omzet_bulanan', 'profit_margin']]
             top_profit['rank'] = range(1, 11)
             top_profit = top_profit[['rank', 'nama_usaha', 'sektor', 'omzet_bulanan', 'profit_margin']]
             
@@ -1358,7 +1358,7 @@ elif menu == "🎮 Komunitas & Gamifikasi":
         st.markdown("---")
         st.markdown("### 📊 Leaderboard")
         
-        leaderboard_data = sme_data.nlargest(10, 'omzet_bulanan')[['nama_usaha', 'sektor', 'omzet_bulanan', 'profit_margin']]
+        leaderboard_data = business_data.nlargest(10, 'omzet_bulanan')[['nama_usaha', 'sektor', 'omzet_bulanan', 'profit_margin']]
         leaderboard_data['rank'] = ['🥇', '🥈', '🥉'] + ['🏅'] * 7
         leaderboard_data = leaderboard_data[['rank', 'nama_usaha', 'sektor', 'omzet_bulanan', 'profit_margin']]
         
@@ -1431,15 +1431,15 @@ else:  # Tentang
     
     st.markdown("""
     **Fertique AI** adalah platform digital terpadu yang menggabungkan teknologi AI, IoT, dan mobile untuk 
-    memberdayakan seluruh ekosistem agribusiness Indonesia - dari petani kecil hingga SME besar.
+    memberdayakan seluruh ekosistem agribusiness Indonesia - dari petani kecil hingga pelaku usaha besar.
     
     #### 🎯 Visi & Misi
     
-    **Visi**: Menjadi platform agribusiness #1 di Indonesia yang memberdayakan 1 juta SME pada 2025
+    **Visi**: Menjadi platform agribusiness #1 di Indonesia yang memberdayakan 1 juta pelaku usaha pada 2025
     
     **Misi**:
     - 🌾 Digitalisasi seluruh rantai pasok agribusiness
-    - 📊 Democratize akses ke teknologi AI untuk petani dan SME
+    - 📊 Democratize akses ke teknologi AI untuk petani dan pelaku usaha
     - 💰 Meningkatkan profitabilitas agribusiness 30-50%
     - 🌍 Mendukung ketahanan pangan dan sustainability
     
@@ -1452,7 +1452,7 @@ else:  # Tentang
     - ✅ Voice input untuk hands-free operation
     - ✅ Offline mode untuk area remote
     
-    **Untuk SME Owner:**
+    **Untuk Pemilik Usaha:**
     - ✅ Business analytics & dashboard
     - ✅ ROI calculator & profit tracking
     - ✅ Inventory management
