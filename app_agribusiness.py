@@ -27,7 +27,7 @@ from premium_features import (
 )
 
 st.set_page_config(
-    page_title="AgriBiz AI - Platform Agribusiness Terpadu",
+    page_title="Fertique AI - Platform Agribusiness Terpadu",
     page_icon="🌾",
     layout="wide",
     initial_sidebar_state="auto"
@@ -391,7 +391,7 @@ st.markdown("""
       banner.innerHTML = `
         <div style="max-width: 800px; margin: 0 auto;">
           <p style="margin: 5px 0; font-size: 16px;">
-            📱 Install AgriBiz AI untuk akses lebih cepat!
+            📱 Install Fertique AI untuk akses lebih cepat!
           </p>
           <button class="install-btn" id="install-btn" onclick="installApp()">Install Aplikasi</button>
           <button class="install-btn" style="background: transparent; color: white; border: 1px solid white;" id="dismiss-btn" onclick="dismissBanner()">
@@ -436,7 +436,7 @@ st.markdown("""
     }
     
     window.addEventListener('appinstalled', () => {
-      console.log('AgriBiz AI has been installed');
+      console.log('Fertique AI has been installed');
       const banner = document.getElementById('install-banner');
       if (banner) {
         banner.style.display = 'none';
@@ -582,14 +582,14 @@ selected_sector = st.sidebar.selectbox(
 )
 
 if menu == "🏠 Beranda":
-    st.title("🌾 Selamat Datang di AgriBiz AI")
+    st.title("🌾 Selamat Datang di Fertique AI")
     st.markdown("### Platform Agribusiness Terpadu Berbasis AI untuk Semua Sektor")
     
     col1, col2 = st.columns([2, 1])
     
     with col1:
         st.markdown("""
-        AgriBiz AI adalah solusi digital terpadu untuk:
+        Fertique AI adalah solusi digital terpadu untuk:
         - 🌾 **Petani** - Prediksi kebutuhan pupuk & pestisida
         - 🥬 **Petani Hortikultura** - Optimasi hasil sayur & buah
         - 🐄 **Peternak** - Manajemen pakan & kesehatan ternak
@@ -665,7 +665,7 @@ elif menu == "💎 Premium Features":
     st.markdown(dyslexia_styles, unsafe_allow_html=True)
     
     title_class = 'class="dyslexia-mode"' if dyslexia_mode else ''
-    st.markdown(f'<h1 {title_class}>💎 AgriBiz AI Premium</h1>', unsafe_allow_html=True)
+    st.markdown(f'<h1 {title_class}>💎 Fertique AI Premium</h1>', unsafe_allow_html=True)
     st.markdown(f'<h3 {title_class}>Unlock Fitur Canggih untuk Maksimalkan Bisnis Agribusiness Anda</h3>', unsafe_allow_html=True)
     
     current_plan = PremiumSubscription.get_user_plan()
@@ -855,7 +855,7 @@ elif menu == "💎 Premium Features":
                         
                         result = SMSAlertSystem.simulate_send_sms(
                             phone,
-                            f"AgriBiz AI: Alert untuk {alert_commodity} telah diaktifkan. Anda akan menerima notifikasi jika {alert_type} Rp {threshold:,}"
+                            f"Fertique AI: Alert untuk {alert_commodity} telah diaktifkan. Anda akan menerima notifikasi jika {alert_type} Rp {threshold:,}"
                         )
                         st.info(f"📤 SMS konfirmasi terkirim! Message ID: {result['message_id']}")
                     else:
@@ -1332,7 +1332,7 @@ elif menu == "🎮 Komunitas & Gamifikasi":
         st.markdown("### 🏆 Your Achievements")
         
         achievements = [
-            {"icon": "🌟", "title": "Pengguna Baru", "desc": "Bergabung dengan AgriBiz AI", "earned": True},
+            {"icon": "🌟", "title": "Pengguna Baru", "desc": "Bergabung dengan Fertique AI", "earned": True},
             {"icon": "📊", "title": "First Prediction", "desc": "Membuat prediksi pertama", "earned": True},
             {"icon": "💰", "title": "Profit Master", "desc": "Profit margin >30% selama 3 bulan", "earned": False},
             {"icon": "🎓", "title": "Knowledge Sharer", "desc": "Berbagi 10 tips", "earned": False},
@@ -1414,7 +1414,7 @@ elif menu == "🎮 Komunitas & Gamifikasi":
         with col2:
             st.markdown("#### 📤 Share to Social Media")
             
-            share_text = "Saya menggunakan AgriBiz AI untuk optimasi bisnis agribusiness saya! Join sekarang dengan code AGRIBIZ2024 🌾"
+            share_text = "Saya menggunakan Fertique AI untuk optimasi bisnis agribusiness saya! Join sekarang dengan code FERTIQUE2024 🌾"
             
             if st.button("📱 Share to WhatsApp", use_container_width=True):
                 st.success("Opening WhatsApp...")
@@ -1426,11 +1426,11 @@ elif menu == "🎮 Komunitas & Gamifikasi":
                 st.success("Opening Twitter...")
 
 else:  # Tentang
-    st.title("ℹ️ Tentang AgriBiz AI")
+    st.title("ℹ️ Tentang Fertique AI")
     st.markdown("### Platform Agribusiness Terpadu Berbasis AI")
     
     st.markdown("""
-    **AgriBiz AI** adalah platform digital terpadu yang menggabungkan teknologi AI, IoT, dan mobile untuk 
+    **Fertique AI** adalah platform digital terpadu yang menggabungkan teknologi AI, IoT, dan mobile untuk 
     memberdayakan seluruh ekosistem agribusiness Indonesia - dari petani kecil hingga SME besar.
     
     #### 🎯 Visi & Misi
@@ -1524,6 +1524,6 @@ if st.sidebar.button("📤 Share App"):
     st.sidebar.info("📱 Share link: agribiz.replit.app")
 
 st.sidebar.markdown("---")
-st.sidebar.caption("🌾 AgriBiz AI © 2025")
+st.sidebar.caption("🌾 Fertique AI © 2025")
 st.sidebar.caption("Platform Agribusiness Terpadu")
 st.sidebar.caption("📱 Android | iOS | Browser")

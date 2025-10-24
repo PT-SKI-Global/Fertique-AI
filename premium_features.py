@@ -195,7 +195,7 @@ class PDFReportGenerator:
     """Generate professional PDF reports"""
     
     @staticmethod
-    def generate_business_report(data, user_name="Pengguna AgriBiz"):
+    def generate_business_report(data, user_name="Pengguna Fertique"):
         """Generate comprehensive business report"""
         buffer = io.BytesIO()
         doc = SimpleDocTemplate(buffer, pagesize=A4,
@@ -223,7 +223,7 @@ class PDFReportGenerator:
             alignment=TA_LEFT
         )
         
-        elements.append(Paragraph("AgriBiz AI", title_style))
+        elements.append(Paragraph("Fertique AI", title_style))
         elements.append(Paragraph("Laporan Analisis Bisnis Premium", styles['Heading2']))
         elements.append(Spacer(1, 12))
         
@@ -292,14 +292,14 @@ class PDFReportGenerator:
         elements.append(PageBreak())
         elements.append(Paragraph("📞 Hubungi Kami", subtitle_style))
         contact_text = """
-        AgriBiz AI - Platform Agribusiness Terpadu<br/>
-        Email: support@agribiz-ai.com<br/>
+        Fertique AI - Platform Agribusiness Terpadu<br/>
+        Email: support@fertique-ai.com<br/>
         WhatsApp: +62 812-3456-7890<br/>
-        Website: www.agribiz-ai.com
+        Website: www.fertique-ai.com
         """
         elements.append(Paragraph(contact_text, styles['BodyText']))
         
-        footer_text = f"<i>Laporan dibuat oleh AgriBiz AI Premium | {datetime.now().strftime('%d %B %Y %H:%M')} | Confidential</i>"
+        footer_text = f"<i>Laporan dibuat oleh Fertique AI Premium | {datetime.now().strftime('%d %B %Y %H:%M')} | Confidential</i>"
         elements.append(Spacer(1, 30))
         elements.append(Paragraph(footer_text, styles['Italic']))
         

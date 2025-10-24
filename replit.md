@@ -1,7 +1,7 @@
-# AgriBiz AI - Platform Agribusiness Terpadu
+# Fertique AI - Platform Agribusiness Terpadu
 
 ## Overview
-AgriBiz AI is a comprehensive agribusiness platform for Indonesian farmers, livestock owners, fisheries, and SMEs. It provides AI-based predictions for fertilizer needs, production tracking, market price monitoring, and business analytics. The platform is mobile-optimized for Android/iOS and ready for Google Play Store deployment, with premium subscription features.
+Fertique AI is a comprehensive agribusiness platform for Indonesian farmers, livestock owners, fisheries, and SMEs. It provides AI-based predictions for fertilizer needs, production tracking, market price monitoring, and business analytics. The platform is mobile-optimized for Android/iOS and ready for Google Play Store deployment, with premium subscription features.
 
 The system integrates multiple data sources to predict fertilizer needs for various crops and fertilizer types across Indonesian provinces. It includes a premium subscription system (Free, Pro Rp 99k/month, Enterprise Rp 299k/month) offering advanced features like confidence interval predictions, SMS alerts, professional PDF reports, and expert AI consultation.
 
