@@ -8,6 +8,37 @@ The system integrates multiple data sources to predict fertilizer needs for vari
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (October 24, 2025)
+
+### UI/UX Improvements
+1. **Redesigned Premium Subscription Cards**
+   - Modern card layout with professional appearance
+   - Color-coded borders (gray for Free, blue for Pro, gold for Enterprise)
+   - Prominent badges ("PALING POPULER", "PAKET AKTIF") positioned at top center
+   - Gradient backgrounds for pricing sections
+   - Clean feature lists with visual hierarchy
+   - Mobile-responsive design with proper spacing
+
+2. **Accessibility Enhancement: Dyslexia-Friendly Mode**
+   - Toggle available in sidebar (♿ Mode Dyslexia-Friendly)
+   - Increases font size from 15px to 18px
+   - Enhanced line-height (1.6 to 2.0) for better readability
+   - Added letter-spacing (0.08em) for visual clarity
+   - Uses more readable fonts (Arial, Comic Sans MS)
+   - Applies globally to all page content
+   - Session-based state management
+
+3. **Improved Feature List Presentation**
+   - Green checkmarks (✓) for included features (#2E7D32, bold)
+   - Gray crosses (✗) for excluded features (#666, normal weight)
+   - Icons properly separated from feature text
+   - Helper function `_build_feature_list()` for clean HTML generation
+
+4. **Voice Input Warning UX**
+   - Changed from intrusive yellow alert to collapsible expander
+   - Less distracting, only shows when user opens it
+   - Cleaner dashboard appearance
+
 ## System Architecture
 
 ### Frontend Architecture
