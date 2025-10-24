@@ -1,5 +1,5 @@
-const CACHE_NAME = 'agribiz-ai-v1.0.0';
-const RUNTIME_CACHE = 'agribiz-runtime-v1';
+const CACHE_NAME = 'fertique-ai-v1.0.0';
+const RUNTIME_CACHE = 'fertique-runtime-v1';
 
 const PRECACHE_URLS = [
   '/',
@@ -80,12 +80,12 @@ self.addEventListener('push', (event) => {
     icon: '/static/icon-192x192.png',
     badge: '/static/icon-72x72.png',
     vibrate: [200, 100, 200],
-    tag: 'agribiz-notification',
+    tag: 'fertique-notification',
     requireInteraction: false
   };
 
   event.waitUntil(
-    self.registration.showNotification('AgriBiz AI', options)
+    self.registration.showNotification('Fertique AI', options)
   );
 });
 

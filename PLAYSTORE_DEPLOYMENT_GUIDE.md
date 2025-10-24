@@ -1,8 +1,8 @@
-# 📱 AgriBiz AI - Panduan Deploy ke Google Play Store
+# 📱 Fertique AI - Panduan Deploy ke Google Play Store
 
 ## 🎯 Ringkasan
 
-AgriBiz AI adalah aplikasi web (Streamlit) yang telah dioptimalkan untuk mobile dan dikonfigurasi sebagai **Progressive Web App (PWA)**. Untuk publish ke Google Play Store, kita akan menggunakan **Trusted Web Activities (TWA)** yang membungkus aplikasi web dalam container Android native.
+Fertique AI adalah aplikasi web (Streamlit) yang telah dioptimalkan untuk mobile dan dikonfigurasi sebagai **Progressive Web App (PWA)**. Untuk publish ke Google Play Store, kita akan menggunakan **Trusted Web Activities (TWA)** yang membungkus aplikasi web dalam container Android native.
 
 ---
 
@@ -16,7 +16,7 @@ AgriBiz AI adalah aplikasi web (Streamlit) yang telah dioptimalkan untuk mobile 
 
 ### 2. Aplikasi Sudah Deploy
 - ✅ Aplikasi sudah di-publish di Replit atau hosting lain
-- ✅ Domain custom (opsional tapi recommended): `https://agribiz-ai.com`
+- ✅ Domain custom (opsional tapi recommended): `https://fertique-ai.com`
 - ✅ SSL/HTTPS aktif (wajib untuk TWA)
 - ✅ PWA manifest dan service worker sudah dikonfigurasi ✓
 
@@ -36,17 +36,17 @@ npm install -g @bubblewrap/cli
 
 ```bash
 # Buat folder project
-mkdir agribiz-ai-android
-cd agribiz-ai-android
+mkdir fertique-ai-android
+cd fertique-ai-android
 
 # Inisialisasi TWA
 bubblewrap init --manifest https://your-app-url.com/static/manifest.json
 ```
 
 Anda akan ditanya beberapa pertanyaan:
-- **Domain**: Masukkan URL aplikasi Anda (e.g., `https://agribiz-ai.replit.app`)
-- **Package name**: `com.agribiz.ai` (format: com.namacompany.namaapp)
-- **App name**: AgriBiz AI
+- **Domain**: Masukkan URL aplikasi Anda (e.g., `https://fertique-ai.replit.app`)
+- **Package name**: `com.fertique.ai` (format: com.namacompany.namaapp)
+- **App name**: Fertique AI
 - **Display mode**: `standalone`
 - **Icon**: Gunakan icon yang sudah dibuat di folder `static/`
 
@@ -94,11 +94,11 @@ bubblewrap build --skipPwaValidation
 2. Pilih platform "Android"
 3. Klik "Generate Package"
 4. Isi informasi:
-   - **Package ID**: `com.agribiz.ai`
-   - **App name**: AgriBiz AI
+   - **Package ID**: `com.fertique.ai`
+   - **App name**: Fertique AI
    - **Version code**: 1
    - **Version name**: 1.0.0
-   - **Launcher name**: AgriBiz AI
+   - **Launcher name**: Fertique AI
    - **Theme color**: `#2E7D32`
    - **Background color**: `#F1F8E9`
 
@@ -118,7 +118,7 @@ bubblewrap build --skipPwaValidation
 ### Step 2: Setup Informasi Aplikasi
 
 #### A. App Details
-- **App name**: AgriBiz AI - Platform Agribusiness Terpadu
+- **App name**: Fertique AI - Platform Agribusiness Terpadu
 - **Default language**: Indonesian (Bahasa Indonesia)
 - **App or game**: App
 - **Free or paid**: Free
@@ -135,7 +135,7 @@ Platform AI untuk Petani, Peternak, Nelayan & SME Indonesia
 
 **Full description** (max 4000 characters):
 ```
-AgriBiz AI - Platform Agribusiness Terpadu Berbasis AI
+Fertique AI - Platform Agribusiness Terpadu Berbasis AI
 
 Solusi digital lengkap untuk seluruh ekosistem agribusiness di Indonesia!
 
@@ -166,14 +166,14 @@ Solusi digital lengkap untuk seluruh ekosistem agribusiness di Indonesia!
 💰 GRATIS & MUDAH DIGUNAKAN:
 Tanpa biaya langganan, interface friendly, support Bahasa Indonesia
 
-Bergabunglah dengan 10,000+ pengguna yang sudah meningkatkan produktivitas dengan AgriBiz AI!
+Bergabunglah dengan 10,000+ pengguna yang sudah meningkatkan produktivitas dengan Fertique AI!
 
 🏆 AWARDS:
 • Best Agritech Solution 2025
 • Top Rated Business App
 
-📧 Support: support@agribiz-ai.com
-🌐 Website: https://agribiz-ai.com
+📧 Support: support@fertique-ai.com
+🌐 Website: https://fertique-ai.com
 ```
 
 #### C. Graphics Assets
@@ -256,7 +256,7 @@ Buat file di root domain: `https://your-domain.com/.well-known/assetlinks.json`
   "relation": ["delegate_permission/common.handle_all_urls"],
   "target": {
     "namespace": "android_app",
-    "package_name": "com.agribiz.ai",
+    "package_name": "com.fertique.ai",
     "sha256_cert_fingerprints": [
       "YOUR_SHA256_FINGERPRINT_HERE"
     ]
@@ -436,7 +436,7 @@ Sebelum publish, pastikan:
 
 ## ✅ Ready to Launch!
 
-Setelah mengikuti guide ini, aplikasi AgriBiz AI siap diluncurkan di Google Play Store!
+Setelah mengikuti guide ini, aplikasi Fertique AI siap diluncurkan di Google Play Store!
 
 **Estimasi Timeline:**
 - Setup & Build: 2-4 jam
@@ -448,6 +448,6 @@ Setelah mengikuti guide ini, aplikasi AgriBiz AI siap diluncurkan di Google Play
 
 ---
 
-**Note**: Guide ini dibuat untuk AgriBiz AI v1.0.0. Untuk update atau pertanyaan, hubungi development team.
+**Note**: Guide ini dibuat untuk Fertique AI v1.0.0. Untuk update atau pertanyaan, hubungi development team.
 
 **Last Updated**: October 24, 2025

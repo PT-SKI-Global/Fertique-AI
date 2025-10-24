@@ -35,7 +35,7 @@ function showInstallPromotion() {
   banner.innerHTML = `
     <div style="max-width: 800px; margin: 0 auto;">
       <p style="margin: 5px 0; font-size: 16px;">
-        📱 Install AgriBiz AI untuk akses lebih cepat!
+        📱 Install Fertique AI untuk akses lebih cepat!
       </p>
       <button class="install-btn" id="install-btn">Install Aplikasi</button>
       <button class="install-btn" style="background: transparent; color: white; border: 1px solid white;" id="dismiss-btn">
@@ -80,7 +80,7 @@ async function installApp() {
 }
 
 window.addEventListener('appinstalled', () => {
-  console.log('AgriBiz AI has been installed');
+  console.log('Fertique AI has been installed');
   const banner = document.getElementById('install-banner');
   if (banner) {
     banner.style.display = 'none';

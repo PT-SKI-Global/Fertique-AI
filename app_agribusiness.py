@@ -633,7 +633,7 @@ if menu == "🏠 Beranda":
     
     for i, (sector, desc) in enumerate(sectors_info):
         with cols[i]:
-            st.image(SECTOR_ICONS[sector], width=None)
+            st.image(SECTOR_ICONS[sector], use_container_width=True)
             st.markdown(f"<h4 style='text-align: center; margin-top: -10px;'>{sector}</h4>", unsafe_allow_html=True)
             st.markdown(f"<p style='text-align: center; color: #666; font-size: 14px;'>{desc}</p>", unsafe_allow_html=True)
             if st.button(f"Lihat {sector}", key=f"sector_{i}", use_container_width=True):
@@ -892,7 +892,7 @@ elif menu == "💎 Premium Features":
             col1, col2 = st.columns([2, 1])
             
             with col1:
-                report_name = st.text_input("Nama Pengguna/Perusahaan", value="PT Agribiz Indonesia")
+                report_name = st.text_input("Nama Pengguna/Perusahaan", value="PT Fertique Indonesia")
                 report_type = st.selectbox(
                     "Jenis Laporan",
                     ["Analisis Bisnis Komprehensif", "Laporan Produksi", "Laporan Keuangan", "Market Analysis"]
@@ -916,7 +916,7 @@ elif menu == "💎 Premium Features":
                         st.download_button(
                             label="📥 Download PDF Report",
                             data=pdf_buffer,
-                            file_name=f"AgriBiz_Report_{datetime.now().strftime('%Y%m%d')}.pdf",
+                            file_name=f"Fertique_Report_{datetime.now().strftime('%Y%m%d')}.pdf",
                             mime="application/pdf",
                             use_container_width=True
                         )
@@ -1021,7 +1021,7 @@ elif menu == "💎 Premium Features":
     <div style="background: #E8F5E9; padding: 20px; border-radius: 15px; margin-top: 30px; text-align: center;">
         <h3>🔒 100% Aman & Terpercaya</h3>
         <p>Pembayaran diproses melalui gateway aman dengan enkripsi SSL 256-bit</p>
-        <p><strong>📞 Butuh bantuan?</strong> Hubungi: support@agribiz-ai.com | WhatsApp: +62 812-3456-7890</p>
+        <p><strong>📞 Butuh bantuan?</strong> Hubungi: support@fertique-ai.com | WhatsApp: +62 812-3456-7890</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1405,7 +1405,7 @@ elif menu == "🎮 Komunitas & Gamifikasi":
             - **25 Referrals**: VIP Member 1 Tahun 👑
             """)
             
-            referral_code = "AGRIBIZ2024"
+            referral_code = "FERTIQUE2024"
             st.text_input("Your Referral Code", value=referral_code, disabled=True)
             
             if st.button("📋 Copy Code"):
@@ -1497,9 +1497,9 @@ else:  # Tentang
     
     #### 📞 Contact & Support
     
-    - 📧 Email: support@agribiz.ai
+    - 📧 Email: support@fertique-ai.com
     - 📱 WhatsApp: +62 812-3456-7890
-    - 🌐 Website: www.agribiz.ai
+    - 🌐 Website: www.fertique-ai.com
     - 📍 Office: Jakarta, Indonesia
     
     ---
@@ -1521,7 +1521,7 @@ if st.sidebar.button("💾 Export Data"):
     st.sidebar.success("✅ Data exported!")
 
 if st.sidebar.button("📤 Share App"):
-    st.sidebar.info("📱 Share link: agribiz.replit.app")
+    st.sidebar.info("📱 Share link: fertique-ai.replit.app")
 
 st.sidebar.markdown("---")
 st.sidebar.caption("🌾 Fertique AI © 2025")
