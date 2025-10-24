@@ -633,7 +633,7 @@ if menu == "🏠 Beranda":
     
     for i, (sector, desc) in enumerate(sectors_info):
         with cols[i]:
-            st.image(SECTOR_ICONS[sector], use_column_width=True)
+            st.image(SECTOR_ICONS[sector], width=None)
             st.markdown(f"<h4 style='text-align: center; margin-top: -10px;'>{sector}</h4>", unsafe_allow_html=True)
             st.markdown(f"<p style='text-align: center; color: #666; font-size: 14px;'>{desc}</p>", unsafe_allow_html=True)
             if st.button(f"Lihat {sector}", key=f"sector_{i}", use_container_width=True):
