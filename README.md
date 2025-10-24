@@ -1,10 +1,10 @@
 # 🌾 AgriBiz AI - Platform Agribusiness Terpadu
 
-[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web-green.svg)](https://replit.com)
+[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web-green.svg)](https://fertique-ai.com)
 [![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://python.org)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.30+-red.svg)](https://streamlit.io)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen.svg)](https://replit.com)
+[![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen.svg)](https://fertique-ai.com)
 
 ## 🎯 Overview
 
@@ -63,7 +63,7 @@ streamlit run app_agribusiness.py --server.port 5000
 
 ### Akses Aplikasi
 - **Local**: http://localhost:5000
-- **Production**: https://your-app.replit.app
+- **Production**: https://www.fertique-ai.com
 
 ## 📱 Mobile Access
 
@@ -113,7 +113,7 @@ agribiz-ai/
 - **PWA**: Progressive Web App features
 
 ### Deployment:
-- **Replit**: Recommended platform
+- **Cloud Platform**: Production ready
 - **Streamlit Cloud**: Alternative option
 - **Heroku/AWS**: Enterprise options
 
@@ -186,17 +186,17 @@ agribiz-ai/
 ## 🚀 Deployment
 
 Lihat [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) untuk panduan lengkap deployment ke:
-- Replit (Recommended)
+- Cloud Platform (Recommended)
 - Streamlit Cloud
 - Heroku
 - AWS/GCP/Azure
 
-### Quick Deploy to Replit:
-1. Click "Deploy" button di Replit
-2. Pilih "Autoscale Deployment"
-3. Configure machine type
-4. Deploy!
-5. App live dalam 2-3 menit
+### Quick Deploy:
+1. Pilih platform deployment
+2. Upload code repository
+3. Configure environment variables
+4. Deploy aplikasi
+5. Aplikasi siap digunakan!
 
 ## 🤝 Contributing
 

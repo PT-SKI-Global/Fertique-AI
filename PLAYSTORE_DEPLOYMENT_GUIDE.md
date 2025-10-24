@@ -15,7 +15,7 @@ Fertique AI adalah aplikasi web (Streamlit) yang telah dioptimalkan untuk mobile
 - ✅ Node.js dan npm terinstall
 
 ### 2. Aplikasi Sudah Deploy
-- ✅ Aplikasi sudah di-publish di Replit atau hosting lain
+- ✅ Aplikasi sudah di-publish di cloud hosting
 - ✅ Domain custom (opsional tapi recommended): `https://fertique-ai.com`
 - ✅ SSL/HTTPS aktif (wajib untuk TWA)
 - ✅ PWA manifest dan service worker sudah dikonfigurasi ✓
@@ -44,7 +44,7 @@ bubblewrap init --manifest https://your-app-url.com/static/manifest.json
 ```
 
 Anda akan ditanya beberapa pertanyaan:
-- **Domain**: Masukkan URL aplikasi Anda (e.g., `https://fertique-ai.replit.app`)
+- **Domain**: Masukkan URL aplikasi Anda (e.g., `https://www.fertique-ai.com`)
 - **Package name**: `com.fertique.ai` (format: com.namacompany.namaapp)
 - **App name**: Fertique AI
 - **Display mode**: `standalone`

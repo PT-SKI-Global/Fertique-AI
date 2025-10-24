@@ -1502,7 +1502,7 @@ else:  # Tentang
     - 📊 Data Analytics: Pandas, NumPy, Plotly
     - 🎤 Speech Recognition: Google Speech API
     - 🌐 Framework: Streamlit (Python)
-    - ☁️ Deployment: Replit Cloud Platform
+    - ☁️ Deployment: Cloud Platform
     
     #### 📈 Impact
     
@@ -1532,7 +1532,7 @@ if st.sidebar.button("💾 Export Data"):
     st.sidebar.success("✅ Data exported!")
 
 if st.sidebar.button("📤 Share App"):
-    st.sidebar.info("📱 Share link: fertique-ai.replit.app")
+    st.sidebar.info("📱 Bagikan aplikasi ini dengan teman!")
 
 st.sidebar.markdown("---")
 st.sidebar.caption("copyright © 2025 PT.Sentra Karya Integrasi Global")

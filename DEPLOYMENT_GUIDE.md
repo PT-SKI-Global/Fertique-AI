@@ -12,9 +12,9 @@
 - Vercel (designed for Next.js/React, not Streamlit)
 - Netlify (static sites only)
 
-## ✅ Recommended Deployment: Replit Publishing
+## ✅ Recommended Deployment: Cloud Platform
 
-### Why Replit?
+### Why Cloud Platform?
 - ✅ Best for Streamlit apps
 - ✅ Auto-scaling support
 - ✅ Built-in SSL/HTTPS
@@ -22,29 +22,29 @@
 - ✅ Zero configuration needed
 - ✅ Free tier available
 
-### Step-by-Step Deployment on Replit:
+### Step-by-Step Deployment:
 
-#### Option 1: Using Replit UI (Easiest)
-1. Click the **"Deploy"** button in top-right corner of Replit
-2. Choose **"Autoscale Deployment"**
+#### Option 1: Using Cloud Platform UI (Easiest)
+1. Login to your cloud platform provider
+2. Choose **"Create New Deployment"**
 3. Configure settings:
    - **Machine Type**: Basic (for testing) or Boosted (for production)
    - **Scaling**: Enable autoscaling for high traffic
    - **Environment**: Production
 4. Click **"Deploy"**
 5. Wait 2-3 minutes for deployment
-6. Your app will be live at: `your-repl-name.replit.app`
+6. Your app will be live at your custom domain
 
-#### Option 2: Using Replit CLI
+#### Option 2: Using CLI
 ```bash
-# Install Replit CLI
-npm install -g replit-cli
+# Install platform CLI
+npm install -g your-platform-cli
 
 # Login
-replit login
+platform-cli login
 
 # Deploy
-replit deploy
+platform-cli deploy
 ```
 
 ### Post-Deployment Checklist:
@@ -60,13 +60,13 @@ replit deploy
 
 ### For Android Users:
 1. Open Chrome browser
-2. Navigate to: `your-app-url.replit.app`
+2. Navigate to: `www.fertique-ai.com`
 3. Click menu (⋮) → "Install app" or "Add to Home Screen"
 4. App icon appears on home screen like native app!
 
 ### For iOS Users:
 1. Open Safari browser
-2. Navigate to: `your-app-url.replit.app`
+2. Navigate to: `www.fertique-ai.com`
 3. Tap Share button (□↑)
 4. Scroll and tap "Add to Home Screen"
 5. Tap "Add"
@@ -104,7 +104,7 @@ git push heroku main
 
 ### Environment Variables (Required):
 ```bash
-# For Replit Secrets
+# For Platform Secrets
 SESSION_SECRET=your-random-secret-key
 
 # For production API keys (if using real APIs)
@@ -114,7 +114,7 @@ KEMENTAN_API_KEY=your-kementan-api-key
 ```
 
 ### SSL/HTTPS:
-- ✅ Replit: Automatic HTTPS
+- ✅ Cloud Platform: Automatic HTTPS
 - ✅ Streamlit Cloud: Automatic HTTPS
 - ⚠️ Self-hosted: Configure Let's Encrypt
 
@@ -148,18 +148,18 @@ def load_data():
 
 ### Using Custom Domain:
 1. Purchase domain from Namecheap/GoDaddy
-2. In Replit deployment settings:
+2. In your cloud platform deployment settings:
    - Go to "Custom Domains"
-   - Add your domain (e.g., agribiz.ai)
+   - Add your domain (e.g., fertique-ai.com)
    - Follow DNS configuration instructions
 3. Wait 24-48 hours for DNS propagation
-4. Access via: https://agribiz.ai
+4. Access via: https://fertique-ai.com
 
 ## 🚀 Scaling Guide
 
 ### Expected Performance:
-- **Basic Replit**: 100-500 concurrent users
-- **Boosted Replit**: 1,000-5,000 concurrent users
+- **Basic Tier**: 100-500 concurrent users
+- **Boosted Tier**: 1,000-5,000 concurrent users
 - **Enterprise**: 10,000+ concurrent users (custom setup)
 
 ### When to Scale Up:
@@ -227,17 +227,17 @@ For deployment help:
 
 Once you've completed the checklist above:
 
-1. **Deploy** to Replit (click Deploy button)
+1. **Deploy** to your cloud platform
 2. **Test** thoroughly on all devices
 3. **Monitor** performance for first 24 hours
 4. **Collect** user feedback
 5. **Iterate** based on feedback
 
-Your AgriBiz AI platform is now ready to serve thousands of agribusiness users across Indonesia! 🌾🚀
+Your Fertique AI platform is now ready to serve thousands of agribusiness users across Indonesia! 🌾🚀
 
 ---
 
 **Version**: 2.0.0 - Full Agribusiness Edition  
 **Status**: ✅ Production Ready  
 **Mobile**: ✅ Android, iOS, Browser Optimized  
-**Deployment**: ✅ Replit Publishing Recommended
+**Deployment**: ✅ Cloud Platform Ready
