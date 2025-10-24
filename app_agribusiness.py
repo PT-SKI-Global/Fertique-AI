@@ -14,7 +14,6 @@ try:
     VOICE_INPUT_AVAILABLE = True
 except ImportError:
     VOICE_INPUT_AVAILABLE = False
-    st.warning("Voice input feature not available. Install 'streamlit-audiorecorder' and 'speechrecognition' packages to enable this feature.")
 
 from data_generator_agri import AgribusinessDataGenerator
 from ml_model import FertiqueMLModel
@@ -483,8 +482,8 @@ def voice_to_text():
     st.markdown("### 🎤 Input Suara (Voice Input)")
     
     if not VOICE_INPUT_AVAILABLE:
-        st.warning("⚠️ Fitur voice input belum tersedia. Gunakan input teks sebagai alternatif.")
-        st.info("📝 Administrator: Install packages 'streamlit-audiorecorder' dan 'speechrecognition' untuk mengaktifkan fitur ini.")
+        with st.expander("ℹ️ Info: Fitur Voice Input", expanded=False):
+            st.info("📝 Fitur voice input sedang dalam pengembangan. Untuk saat ini, silakan gunakan input teks sebagai alternatif.")
         return None
     
     st.info("📱 Fitur ini memudahkan petani untuk input data tanpa mengetik - cocok untuk di lapangan!")
@@ -538,6 +537,21 @@ st.sidebar.markdown("---")
 st.sidebar.markdown(f"**📦 Paket Anda:** {plan_info['name']}")
 if user_plan == 'free':
     st.sidebar.info("⬆️ Upgrade ke Pro untuk fitur premium!")
+
+st.sidebar.markdown("---")
+
+if 'dyslexia_mode' not in st.session_state:
+    st.session_state.dyslexia_mode = False
+
+dyslexia_toggle = st.sidebar.checkbox(
+    "♿ Mode Dyslexia-Friendly",
+    value=st.session_state.dyslexia_mode,
+    help="Aktifkan untuk font lebih besar, spasi lebih lega, dan kontras tinggi"
+)
+
+if dyslexia_toggle != st.session_state.dyslexia_mode:
+    st.session_state.dyslexia_mode = dyslexia_toggle
+    st.rerun()
 
 st.sidebar.markdown("---")
 selected_sector = st.sidebar.selectbox(
@@ -602,52 +616,141 @@ if menu == "🏠 Beranda":
                 st.rerun()
 
 elif menu == "💎 Premium Features":
-    st.title("💎 AgriBiz AI Premium")
-    st.markdown("### Unlock Fitur Canggih untuk Maksimalkan Bisnis Agribusiness Anda")
+    dyslexia_mode = st.session_state.get('dyslexia_mode', False)
+    
+    dyslexia_styles = """
+    <style>
+    .dyslexia-mode {
+        font-family: Arial, 'Comic Sans MS', sans-serif !important;
+        font-size: 18px !important;
+        line-height: 2.0 !important;
+        letter-spacing: 0.12em !important;
+        word-spacing: 0.16em !important;
+    }
+    .dyslexia-mode h1, .dyslexia-mode h2, .dyslexia-mode h3 {
+        line-height: 1.8 !important;
+        margin-bottom: 1em !important;
+    }
+    .dyslexia-mode p, .dyslexia-mode li {
+        margin-bottom: 1em !important;
+    }
+    </style>
+    """ if dyslexia_mode else ""
+    
+    st.markdown(dyslexia_styles, unsafe_allow_html=True)
+    
+    title_class = 'class="dyslexia-mode"' if dyslexia_mode else ''
+    st.markdown(f'<h1 {title_class}>💎 AgriBiz AI Premium</h1>', unsafe_allow_html=True)
+    st.markdown(f'<h3 {title_class}>Unlock Fitur Canggih untuk Maksimalkan Bisnis Agribusiness Anda</h3>', unsafe_allow_html=True)
     
     current_plan = PremiumSubscription.get_user_plan()
     
     st.markdown("---")
-    st.markdown("## 📦 Pilih Paket Berlangganan")
+    st.markdown(f'<h2 {title_class}>📦 Pilih Paket Berlangganan</h2>', unsafe_allow_html=True)
+    st.markdown("")
     
-    col1, col2, col3 = st.columns(3)
+    font_size = "18px" if dyslexia_mode else "15px"
+    line_height = "2.0" if dyslexia_mode else "1.6"
+    letter_spacing = "0.08em" if dyslexia_mode else "normal"
+    padding = "35px" if dyslexia_mode else "30px"
+    
+    col1, col2, col3 = st.columns(3, gap="large")
     
     for i, (plan_id, plan_details) in enumerate(PremiumSubscription.PLANS.items()):
         with [col1, col2, col3][i]:
             is_popular = plan_details.get('popular', False)
             is_current = plan_id == current_plan
             
+            border_color = "#FFD700" if is_popular else ("#4CAF50" if is_current else plan_details['color'])
+            border_width = "4px" if (is_popular or is_current) else "2px"
+            
+            badge_html = ""
+            if is_popular:
+                badge_html = '<div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; padding: 8px 20px; border-radius: 20px; font-weight: bold; font-size: 13px; box-shadow: 0 4px 15px rgba(255,215,0,0.4);">⭐ PALING POPULER</div>'
+            elif is_current:
+                badge_html = '<div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; font-size: 13px; box-shadow: 0 4px 15px rgba(76,175,80,0.4);">✓ PAKET AKTIF</div>'
+            
             st.markdown(f"""
             <div style="
-                background: linear-gradient(135deg, {plan_details['color']} 0%, {plan_details['color']}CC 100%);
-                padding: 25px;
-                border-radius: 15px;
-                color: white;
-                min-height: 450px;
+                background: white;
+                border: {border_width} solid {border_color};
+                border-radius: 20px;
+                padding: {padding};
+                min-height: 580px;
                 position: relative;
+                box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                margin-top: 20px;
             ">
-                {f'<div style="position: absolute; top: 10px; right: 10px; background: gold; color: black; padding: 5px 15px; border-radius: 15px; font-weight: bold; font-size: 12px;">⭐ POPULAR</div>' if is_popular else ''}
-                {f'<div style="position: absolute; top: 10px; right: 10px; background: #4CAF50; color: white; padding: 5px 15px; border-radius: 15px; font-weight: bold; font-size: 12px;">✓ AKTIF</div>' if is_current else ''}
-                <h2 style="margin-top: {"30px" if is_popular or is_current else "0px"};">{plan_details['name']}</h2>
-                <h1 style="font-size: 32px; margin: 15px 0;">{plan_details['price_text']}</h1>
-                <hr style="border-color: rgba(255,255,255,0.3);">
-                <ul style="list-style: none; padding: 0; margin-top: 20px; text-align: left;">
-                    {''.join([f'<li style="margin: 10px 0; font-size: 14px;">{feature}</li>' for feature in plan_details['features']])}
-                </ul>
+                {badge_html}
+                
+                <div style="text-align: center; margin-top: {"35px" if (is_popular or is_current) else "15px"};">
+                    <h2 style="
+                        color: {plan_details['color']};
+                        font-size: {'28px' if dyslexia_mode else '26px'};
+                        font-weight: bold;
+                        margin-bottom: 15px;
+                        letter-spacing: {letter_spacing};
+                    ">{plan_details['name']}</h2>
+                    
+                    <div style="
+                        background: linear-gradient(135deg, {plan_details['color']}15 0%, {plan_details['color']}05 100%);
+                        padding: 20px;
+                        border-radius: 15px;
+                        margin: 20px 0;
+                    ">
+                        <div style="
+                            font-size: {'40px' if dyslexia_mode else '36px'};
+                            font-weight: bold;
+                            color: {plan_details['color']};
+                            line-height: 1.2;
+                        ">{plan_details['price_text'].split('/')[0]}</div>
+                        {f'<div style="font-size: {font_size}; color: #666; margin-top: 5px;">per bulan</div>' if '/' in plan_details['price_text'] else ''}
+                    </div>
+                </div>
+                
+                <div style="
+                    background: #f8f9fa;
+                    border-radius: 12px;
+                    padding: 20px;
+                    margin-top: 20px;
+                ">
+                    <ul style="
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                    ">
+                        {''.join([f'''
+                        <li style="
+                            margin: {"18px" if dyslexia_mode else "14px"} 0;
+                            font-size: {font_size};
+                            line-height: {line_height};
+                            letter-spacing: {letter_spacing};
+                            color: {"#2E7D32" if "✓" in feature else "#666"};
+                            font-weight: {"bold" if "✓" in feature else "normal"};
+                            display: flex;
+                            align-items: flex-start;
+                        ">
+                            <span style="margin-right: 10px; font-size: 18px;">{"✓" if "✓" in feature else "✗"}</span>
+                            <span>{feature.replace("✓ ", "").replace("✗ ", "")}</span>
+                        </li>
+                        ''' for feature in plan_details['features']])}
+                    </ul>
+                </div>
             </div>
             """, unsafe_allow_html=True)
             
-            st.markdown("")
+            st.markdown("<br>", unsafe_allow_html=True)
             if plan_id != current_plan:
-                if st.button(f"🚀 {'Upgrade' if plan_id != 'free' else 'Downgrade'} ke {plan_details['name']}", 
-                           key=f"upgrade_{plan_id}", 
-                           use_container_width=True):
+                button_color = "#2E7D32" if plan_id != 'free' else "#757575"
+                button_text = f"🚀 {'Upgrade' if plan_id != 'free' else 'Downgrade'} ke {plan_details['name']}"
+                if st.button(button_text, key=f"upgrade_{plan_id}", use_container_width=True):
                     PremiumSubscription.set_user_plan(plan_id)
                     st.success(f"✅ Berhasil {'upgrade' if plan_id != 'free' else 'switch'} ke paket {plan_details['name']}!")
                     st.balloons()
                     st.rerun()
             else:
-                st.info(f"✓ Paket {plan_details['name']} Aktif")
+                st.success(f"✓ Paket {plan_details['name']} Aktif", icon="✅")
     
     st.markdown("---")
     
