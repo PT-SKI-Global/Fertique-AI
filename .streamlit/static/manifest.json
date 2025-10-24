@@ -1,0 +1,29 @@
+{
+  "name": "AgriBiz AI - Platform Agribusiness Terpadu",
+  "short_name": "AgriBiz AI",
+  "description": "Platform Agribusiness berbasis AI untuk Petani, Peternak, SME di Indonesia",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F1F8E9",
+  "theme_color": "#2E7D32",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/628/628283.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/628/628283.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "agriculture"],
+  "lang": "id-ID",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false
+}
