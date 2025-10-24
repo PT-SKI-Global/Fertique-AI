@@ -21,56 +21,319 @@ st.set_page_config(
     page_title="AgriBiz AI - Platform Agribusiness Terpadu",
     page_icon="🌾",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="auto"
 )
 
 st.markdown("""
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#2E7D32">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="/manifest.json">
+    
     <style>
-    .main {background-color: #F1F8E9;}
+    /* PWA Install Banner */
+    .install-banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+        color: white;
+        padding: 15px;
+        text-align: center;
+        z-index: 9999;
+        box-shadow: 0 -4px 12px rgba(0,0,0,0.3);
+    }
+    
+    .install-btn {
+        background: white;
+        color: #2E7D32;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 16px;
+        margin: 5px;
+        cursor: pointer;
+        min-height: 44px;
+        min-width: 120px;
+    }
+    
+    /* Mobile Optimized Base Styles */
+    * {
+        -webkit-tap-highlight-color: rgba(46, 125, 50, 0.3);
+        touch-action: manipulation;
+    }
+    
+    .main {
+        background-color: #F1F8E9;
+        padding: 10px !important;
+    }
+    
+    /* Mobile-Optimized Buttons */
     .stButton>button {
         background-color: #2E7D32;
         color: white;
-        border-radius: 20px;
-        padding: 12px 24px;
-        font-size: 16px;
+        border-radius: 25px;
+        padding: 16px 32px;
+        font-size: 18px;
         font-weight: bold;
+        min-height: 48px;
+        min-width: 120px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
+    
+    .stButton>button:active {
+        transform: scale(0.95);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    /* Metric Cards - Mobile Optimized */
     .metric-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 20px;
         border-radius: 15px;
         color: white;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        margin: 10px 0;
     }
+    
     .sector-card {
         background-color: white;
-        padding: 15px;
-        border-radius: 10px;
-        border-left: 5px solid #2E7D32;
-        margin: 10px 0;
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 6px solid #2E7D32;
+        margin: 15px 0;
         cursor: pointer;
-        transition: transform 0.2s;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        min-height: 60px;
     }
-    .sector-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    
+    .sector-card:active {
+        transform: scale(0.98);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
+    
+    /* Typography - Mobile Optimized */
+    h1 {
+        color: #2E7D32;
+        font-size: clamp(24px, 5vw, 36px) !important;
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+    
+    h2 {
+        color: #2E7D32;
+        font-size: clamp(20px, 4vw, 28px) !important;
+        line-height: 1.3;
+    }
+    
+    h3 {
+        color: #2E7D32;
+        font-size: clamp(18px, 3.5vw, 24px) !important;
+        line-height: 1.4;
+    }
+    
+    p, li, div {
+        font-size: clamp(14px, 3vw, 16px) !important;
+        line-height: 1.6;
+    }
+    
+    /* Form Inputs - Touch Optimized */
+    .stTextInput>div>div>input,
+    .stNumberInput>div>div>input,
+    .stSelectbox>div>div>select {
+        min-height: 48px !important;
+        font-size: 16px !important;
+        padding: 12px !important;
+        border-radius: 10px !important;
+    }
+    
+    /* Radio Buttons - Larger Touch Targets */
+    .stRadio>div {
+        gap: 15px;
+    }
+    
+    .stRadio label {
+        min-height: 44px;
+        padding: 10px;
+        font-size: 16px !important;
+    }
+    
+    /* Mobile Navigation */
     .mobile-btn {
         width: 100%;
-        padding: 15px !important;
-        margin: 5px 0;
-        font-size: 18px !important;
+        padding: 18px !important;
+        margin: 8px 0;
+        font-size: 20px !important;
+        min-height: 56px;
     }
-    h1, h2, h3 {color: #2E7D32;}
+    
+    /* Achievement Badges */
     .achievement-badge {
         display: inline-block;
         background: gold;
-        padding: 8px 15px;
-        border-radius: 20px;
-        margin: 5px;
+        padding: 10px 18px;
+        border-radius: 25px;
+        margin: 8px;
         font-weight: bold;
+        font-size: 16px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    
+    /* Sidebar - Mobile Optimized */
+    [data-testid="stSidebar"] {
+        min-width: 280px !important;
+    }
+    
+    [data-testid="stSidebar"] .stRadio label {
+        font-size: 18px !important;
+        padding: 12px !important;
+    }
+    
+    /* Tables - Horizontal Scroll */
+    .dataframe {
+        font-size: 14px !important;
+        overflow-x: auto;
+    }
+    
+    /* Metrics - Responsive */
+    [data-testid="stMetricValue"] {
+        font-size: clamp(24px, 6vw, 36px) !important;
+    }
+    
+    [data-testid="stMetricLabel"] {
+        font-size: clamp(14px, 3vw, 16px) !important;
+    }
+    
+    /* Charts - Responsive */
+    .js-plotly-plot {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 300px;
+    }
+    
+    /* Tabs - Touch Friendly */
+    .stTabs [data-baseweb="tab-list"] button {
+        min-height: 48px;
+        font-size: 16px !important;
+        padding: 12px 20px !important;
+    }
+    
+    /* Loading Spinner */
+    .stSpinner > div {
+        border-width: 4px;
+    }
+    
+    /* Mobile Responsive Columns */
+    @media (max-width: 768px) {
+        .main {
+            padding: 5px !important;
+        }
+        
+        .stColumn {
+            min-width: 100% !important;
+        }
+        
+        h1 {
+            font-size: 28px !important;
+        }
+        
+        h2 {
+            font-size: 24px !important;
+        }
+        
+        h3 {
+            font-size: 20px !important;
+        }
+        
+        .sector-card {
+            padding: 15px;
+        }
+        
+        [data-testid="stSidebar"] {
+            width: 100% !important;
+        }
+    }
+    
+    /* Landscape Mobile */
+    @media (max-width: 896px) and (orientation: landscape) {
+        .main {
+            max-height: 100vh;
+            overflow-y: auto;
+        }
+    }
+    
+    /* Tablet Optimization */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .stButton>button {
+            font-size: 20px;
+            padding: 18px 36px;
+        }
+    }
+    
+    /* Safe Area for Notched Devices */
+    @supports (padding: max(0px)) {
+        .main {
+            padding-left: max(10px, env(safe-area-inset-left));
+            padding-right: max(10px, env(safe-area-inset-right));
+            padding-bottom: max(10px, env(safe-area-inset-bottom));
+        }
+    }
+    
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+        .main {
+            background-color: #1a1a1a;
+        }
+        
+        .sector-card {
+            background-color: #2d2d2d;
+            color: #ffffff;
+        }
+    }
+    
+    /* Accessibility - High Contrast */
+    @media (prefers-contrast: high) {
+        .stButton>button {
+            border: 3px solid white;
+        }
+    }
+    
+    /* Reduce Motion for Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+    
+    /* Pull to Refresh Prevention */
+    body {
+        overscroll-behavior-y: contain;
+    }
+    
+    /* iOS Specific Fixes */
+    input, textarea, select {
+        font-size: 16px !important;
+    }
+    
+    /* Prevent Zoom on Focus */
+    @media screen and (max-width: 768px) {
+        input:focus,
+        select:focus,
+        textarea:focus {
+            font-size: 16px !important;
+        }
     }
     </style>
+    <script src="/static/pwa-install.js"></script>
 """, unsafe_allow_html=True)
 
 @st.cache_data
