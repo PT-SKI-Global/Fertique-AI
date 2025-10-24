@@ -515,6 +515,21 @@ def voice_to_text():
     
     return None
 
+def _build_feature_list(features, font_size, line_height, letter_spacing, dyslexia_mode):
+    """Helper function to build feature list HTML"""
+    html_parts = []
+    for feature in features:
+        is_included = feature.strip().startswith("✓")
+        color = "#2E7D32" if is_included else "#666"
+        weight = "600" if is_included else "normal"
+        icon = "✓" if is_included else "✗"
+        text = feature.strip()[2:] if len(feature.strip()) > 2 else feature
+        margin = "18px" if dyslexia_mode else "14px"
+        
+        html_parts.append(f'<li style="margin: {margin} 0; font-size: {font_size}; line-height: {line_height}; letter-spacing: {letter_spacing}; color: {color}; font-weight: {weight}; display: flex; align-items: flex-start;"><span style="margin-right: 10px; font-size: 20px; min-width: 20px;">{icon}</span><span>{text}</span></li>')
+    
+    return ''.join(html_parts)
+
 generator = load_agri_data()
 sme_data = get_sme_data(generator)
 
@@ -670,75 +685,14 @@ elif menu == "💎 Premium Features":
             elif is_current:
                 badge_html = '<div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; font-size: 13px; box-shadow: 0 4px 15px rgba(76,175,80,0.4);">✓ PAKET AKTIF</div>'
             
-            st.markdown(f"""
-            <div style="
-                background: white;
-                border: {border_width} solid {border_color};
-                border-radius: 20px;
-                padding: {padding};
-                min-height: 580px;
-                position: relative;
-                box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                margin-top: 20px;
-            ">
-                {badge_html}
-                
-                <div style="text-align: center; margin-top: {"35px" if (is_popular or is_current) else "15px"};">
-                    <h2 style="
-                        color: {plan_details['color']};
-                        font-size: {'28px' if dyslexia_mode else '26px'};
-                        font-weight: bold;
-                        margin-bottom: 15px;
-                        letter-spacing: {letter_spacing};
-                    ">{plan_details['name']}</h2>
-                    
-                    <div style="
-                        background: linear-gradient(135deg, {plan_details['color']}15 0%, {plan_details['color']}05 100%);
-                        padding: 20px;
-                        border-radius: 15px;
-                        margin: 20px 0;
-                    ">
-                        <div style="
-                            font-size: {'40px' if dyslexia_mode else '36px'};
-                            font-weight: bold;
-                            color: {plan_details['color']};
-                            line-height: 1.2;
-                        ">{plan_details['price_text'].split('/')[0]}</div>
-                        {f'<div style="font-size: {font_size}; color: #666; margin-top: 5px;">per bulan</div>' if '/' in plan_details['price_text'] else ''}
-                    </div>
-                </div>
-                
-                <div style="
-                    background: #f8f9fa;
-                    border-radius: 12px;
-                    padding: 20px;
-                    margin-top: 20px;
-                ">
-                    <ul style="
-                        list-style: none;
-                        padding: 0;
-                        margin: 0;
-                    ">
-                        {''.join([f'''
-                        <li style="
-                            margin: {"18px" if dyslexia_mode else "14px"} 0;
-                            font-size: {font_size};
-                            line-height: {line_height};
-                            letter-spacing: {letter_spacing};
-                            color: {"#2E7D32" if "✓" in feature else "#666"};
-                            font-weight: {"bold" if "✓" in feature else "normal"};
-                            display: flex;
-                            align-items: flex-start;
-                        ">
-                            <span style="margin-right: 10px; font-size: 18px;">{"✓" if "✓" in feature else "✗"}</span>
-                            <span>{feature.replace("✓ ", "").replace("✗ ", "")}</span>
-                        </li>
-                        ''' for feature in plan_details['features']])}
-                    </ul>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+            price_per_month = f'<div style="font-size: {font_size}; color: #666; margin-top: 5px;">per bulan</div>' if '/' in plan_details['price_text'] else ''
+            margin_top = "35px" if (is_popular or is_current) else "15px"
+            title_font = '28px' if dyslexia_mode else '26px'
+            price_font = '40px' if dyslexia_mode else '36px'
+            
+            card_html = f'<div style="background: white; border: {border_width} solid {border_color}; border-radius: 20px; padding: {padding}; min-height: 580px; position: relative; box-shadow: 0 8px 30px rgba(0,0,0,0.12); margin-top: 20px;">{badge_html}<div style="text-align: center; margin-top: {margin_top};"><h2 style="color: {plan_details["color"]}; font-size: {title_font}; font-weight: bold; margin-bottom: 15px; letter-spacing: {letter_spacing};">{plan_details["name"]}</h2><div style="background: linear-gradient(135deg, {plan_details["color"]}15 0%, {plan_details["color"]}05 100%); padding: 20px; border-radius: 15px; margin: 20px 0;"><div style="font-size: {price_font}; font-weight: bold; color: {plan_details["color"]}; line-height: 1.2;">{plan_details["price_text"].split("/")[0]}</div>{price_per_month}</div></div><div style="background: #f8f9fa; border-radius: 12px; padding: 20px; margin-top: 20px;"><ul style="list-style: none; padding: 0; margin: 0;">{_build_feature_list(plan_details["features"], font_size, line_height, letter_spacing, dyslexia_mode)}</ul></div></div>'
+            
+            st.markdown(card_html, unsafe_allow_html=True)
             
             st.markdown("<br>", unsafe_allow_html=True)
             if plan_id != current_plan:
