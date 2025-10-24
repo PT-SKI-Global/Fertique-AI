@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import plotly.express as px
 import plotly.graph_objects as go
 from st_aggrid import AgGrid, GridOptionsBuilder
-from audio_recorder_streamlit import audio_recorder
+from audiorecorder import audiorec
 import speech_recognition as sr
 import io
 import tempfile
@@ -105,13 +105,11 @@ def voice_to_text():
     st.markdown("### 🎤 Input Suara (Voice Input)")
     st.info("📱 Fitur ini memudahkan petani untuk input data tanpa mengetik - cocok untuk di lapangan!")
     
-    audio_bytes = audio_recorder(
-        text="Klik untuk rekam suara",
-        recording_color="#e74c3c",
-        neutral_color="#2E7D32",
-        icon_name="microphone",
-        icon_size="3x"
-    )
+    audio_data = audiorec("Klik untuk rekam", "Sedang merekam...")
+    if audio_data:
+        audio_bytes = audio_data.export().read()
+    else:
+        audio_bytes = None
     
     if audio_bytes:
         st.audio(audio_bytes, format="audio/wav")
