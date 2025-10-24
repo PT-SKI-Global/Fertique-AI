@@ -2,8 +2,10 @@
 port = 5000
 address = "0.0.0.0"
 headless = true
-enableCORS = true
-enableXsrfProtection = true
+enableCORS = false
+enableXsrfProtection = false
+maxUploadSize = 200
+enableStaticServing = true
 
 [browser]
 gatherUsageStats = false
@@ -20,3 +22,10 @@ font = "sans serif"
 [client]
 showErrorDetails = false
 toolbarMode = "minimal"
+
+[runner]
+magicEnabled = true
+fastReruns = true
+
+[logger]
+level = "info"
