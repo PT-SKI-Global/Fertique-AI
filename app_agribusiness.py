@@ -1501,18 +1501,7 @@ else:  # Tentang
     - 📱 WhatsApp: +62 812-3456-7890
     - 🌐 Website: www.fertique-ai.com
     - 📍 Office: Jakarta, Indonesia
-    
-    ---
-    
-    **Version**: 2.0.0 - Full Agribusiness Edition
-    **Last Updated**: Oktober 2025
-    **Status**: ✅ Production Ready - Mobile Optimized
     """)
-    
-    if st.button("🚀 Deploy ke Production", width='stretch'):
-        st.balloons()
-        st.success("✅ Ready untuk di-publish! Gunakan Replit Deployment untuk go live.")
-        st.info("📱 Aplikasi sudah dioptimasi untuk Android, iOS, dan Browser")
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 📥 Export & Share")
