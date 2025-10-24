@@ -43,6 +43,10 @@ Preferred communication style: Simple, everyday language.
    - Fixed Streamlit deprecation warnings: `use_container_width=True` → `width='stretch'`
    - All image displays optimized for Streamlit 1.40+
 
+6. **Copyright Update**
+   - Changed footer copyright from "🌾 Fertique AI © 2025" to "copyright © 2025 PT.Sentra Karya Integrasi Global"
+   - Applied to both app_agribusiness.py and app.py
+
 ### Previous UI/UX Improvements
 1. **Redesigned Premium Subscription Cards**
    - Modern card layout with professional appearance

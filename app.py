@@ -948,4 +948,4 @@ if st.sidebar.button("💾 Export Semua Data ke Excel"):
         )
 
 st.sidebar.markdown("---")
-st.sidebar.caption("🌾 Fertique AI © 2025 - Powered by AI & Machine Learning")
+st.sidebar.caption("copyright © 2025 PT.Sentra Karya Integrasi Global")

@@ -1524,6 +1524,6 @@ if st.sidebar.button("📤 Share App"):
     st.sidebar.info("📱 Share link: fertique-ai.replit.app")
 
 st.sidebar.markdown("---")
-st.sidebar.caption("🌾 Fertique AI © 2025")
+st.sidebar.caption("copyright © 2025 PT.Sentra Karya Integrasi Global")
 st.sidebar.caption("Platform Agribusiness Terpadu")
 st.sidebar.caption("📱 Android | iOS | Browser")
