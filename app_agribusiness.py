@@ -587,10 +587,21 @@ if dyslexia_toggle != st.session_state.dyslexia_mode:
     st.rerun()
 
 st.sidebar.markdown("---")
+
+if 'selected_sector' not in st.session_state:
+    st.session_state.selected_sector = list(generator.sectors.keys())[0]
+
+sector_options = list(generator.sectors.keys())
+default_sector_index = sector_options.index(st.session_state.selected_sector) if st.session_state.selected_sector in sector_options else 0
+
 selected_sector = st.sidebar.selectbox(
     "🔍 Pilih Sektor",
-    list(generator.sectors.keys())
+    sector_options,
+    index=default_sector_index
 )
+
+if selected_sector != st.session_state.selected_sector:
+    st.session_state.selected_sector = selected_sector
 
 if menu == "🏠 Beranda":
     st.title("🌾 Selamat Datang di Fertique AI")
@@ -648,8 +659,8 @@ if menu == "🏠 Beranda":
             st.markdown(f"<h4 style='text-align: center; margin-top: -10px;'>{sector}</h4>", unsafe_allow_html=True)
             st.markdown(f"<p style='text-align: center; color: #666; font-size: 14px;'>{desc}</p>", unsafe_allow_html=True)
             if st.button(f"Lihat {sector}", key=f"sector_{i}", width='stretch'):
-                st.session_state.selected_sector = sector
-                st.session_state.current_menu = "🌾 Sektor Agribusiness"
+                st.session_state['selected_sector'] = sector
+                st.session_state['current_menu'] = "🌾 Sektor Agribusiness"
                 st.rerun()
 
 elif menu == "💎 Premium Features":
