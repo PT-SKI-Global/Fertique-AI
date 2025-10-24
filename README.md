@@ -220,9 +220,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 🏆 Awards & Recognition
 
-- 🥇 Best Agritech Startup 2024
-- 🌟 Top 10 Social Impact Startup
-- 💡 Innovation Award - Digital Agriculture
+- 🥇 Finalis 5 Besar pada Lomba Wirausaha Muda Pemula untuk Kategori Social Enterprise dari KEMENPORA 2024
+- 🌟 Lolos 225 Besar kompetisi Bisnis Diplomat Success Challenge oleh Wismilak Group tahun 2024
 
 ## 🔮 Roadmap
 

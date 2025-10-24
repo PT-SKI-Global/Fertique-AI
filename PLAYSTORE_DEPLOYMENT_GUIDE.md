@@ -169,8 +169,8 @@ Tanpa biaya langganan, interface friendly, support Bahasa Indonesia
 Bergabunglah dengan 10,000+ pengguna yang sudah meningkatkan produktivitas dengan Fertique AI!
 
 🏆 AWARDS:
-• Best Agritech Solution 2025
-• Top Rated Business App
+• Finalis 5 Besar Lomba Wirausaha Muda Pemula - Kategori Social Enterprise KEMENPORA 2024
+• Lolos 225 Besar kompetisi Bisnis Diplomat Success Challenge - Wismilak Group 2024
 
 📧 Support: support@fertique-ai.com
 🌐 Website: https://fertique-ai.com

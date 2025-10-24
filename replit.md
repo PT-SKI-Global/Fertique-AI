@@ -64,6 +64,12 @@ Preferred communication style: Simple, everyday language.
    - Removed deployment status messages
    - Cleaner, more professional appearance
 
+9. **Updated Awards & Recognition**
+   - Replaced generic awards with actual achievements:
+     - Finalis 5 Besar pada Lomba Wirausaha Muda Pemula untuk Kategori Social Enterprise dari KEMENPORA 2024
+     - Lolos 225 Besar kompetisi Bisnis Diplomat Success Challenge oleh Wismilak Group tahun 2024
+   - Applied to: app_agribusiness.py, README.md, PLAYSTORE_DEPLOYMENT_GUIDE.md
+
 ### Previous UI/UX Improvements
 1. **Redesigned Premium Subscription Cards**
    - Modern card layout with professional appearance
