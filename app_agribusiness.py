@@ -5,10 +5,16 @@ from datetime import datetime, timedelta
 import plotly.express as px
 import plotly.graph_objects as go
 from st_aggrid import AgGrid, GridOptionsBuilder
-from audiorecorder import audiorec
-import speech_recognition as sr
 import io
 import tempfile
+
+try:
+    from audiorecorder import audiorec
+    import speech_recognition as sr
+    VOICE_INPUT_AVAILABLE = True
+except ImportError:
+    VOICE_INPUT_AVAILABLE = False
+    st.warning("Voice input feature not available. Install 'streamlit-audiorecorder' and 'speechrecognition' packages to enable this feature.")
 
 from data_generator_agri import AgribusinessDataGenerator
 from ml_model import FertiqueMLModel
@@ -30,7 +36,10 @@ st.markdown("""
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/icon-192x192.png">
     
     <style>
     /* PWA Install Banner */
@@ -333,7 +342,109 @@ st.markdown("""
         }
     }
     </style>
-    <script src="/static/pwa-install.js"></script>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+    <script>
+    let deferredPrompt;
+    
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+          .then((registration) => {
+            console.log('ServiceWorker registered:', registration.scope);
+            
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  console.log('New update available!');
+                }
+              });
+            });
+          })
+          .catch((error) => {
+            console.log('ServiceWorker registration failed:', error);
+          });
+      });
+    }
+    
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      console.log('PWA install prompt available');
+      showInstallBanner();
+    });
+    
+    function showInstallBanner() {
+      const dismissed = localStorage.getItem('installPromptDismissed');
+      if (dismissed && (Date.now() - parseInt(dismissed)) < 7 * 24 * 60 * 60 * 1000) {
+        return;
+      }
+      
+      const banner = document.createElement('div');
+      banner.className = 'install-banner';
+      banner.id = 'install-banner';
+      banner.innerHTML = `
+        <div style="max-width: 800px; margin: 0 auto;">
+          <p style="margin: 5px 0; font-size: 16px;">
+            📱 Install AgriBiz AI untuk akses lebih cepat!
+          </p>
+          <button class="install-btn" id="install-btn" onclick="installApp()">Install Aplikasi</button>
+          <button class="install-btn" style="background: transparent; color: white; border: 1px solid white;" id="dismiss-btn" onclick="dismissBanner()">
+            Nanti Saja
+          </button>
+        </div>
+      `;
+      
+      if (!document.getElementById('install-banner')) {
+        document.body.appendChild(banner);
+      }
+    }
+    
+    async function installApp() {
+      if (!deferredPrompt) {
+        console.log('Install prompt not available');
+        return;
+      }
+      
+      deferredPrompt.prompt();
+      
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`User response to install prompt: ${outcome}`);
+      
+      if (outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+        const banner = document.getElementById('install-banner');
+        if (banner) {
+          banner.style.display = 'none';
+        }
+      }
+      
+      deferredPrompt = null;
+    }
+    
+    function dismissBanner() {
+      const banner = document.getElementById('install-banner');
+      if (banner) {
+        banner.style.display = 'none';
+      }
+      localStorage.setItem('installPromptDismissed', Date.now());
+    }
+    
+    window.addEventListener('appinstalled', () => {
+      console.log('AgriBiz AI has been installed');
+      const banner = document.getElementById('install-banner');
+      if (banner) {
+        banner.style.display = 'none';
+      }
+    });
+    
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+      console.log('Running in standalone mode (installed as app)');
+      document.documentElement.classList.add('standalone-mode');
+    }
+    </script>
 """, unsafe_allow_html=True)
 
 @st.cache_data
@@ -343,13 +454,13 @@ def load_agri_data():
     return generator
 
 @st.cache_data
-def get_sector_data(sector, generator):
+def get_sector_data(sector, _generator):
     """Get data for specific sector"""
-    weather = generator.generate_weather_data(months=12)
-    production = generator.generate_production_data(sector, years=2)
-    inputs = generator.generate_input_needs(sector, months=12)
-    market = generator.generate_market_prices(sector, days=90)
-    stock = generator.get_current_stock_data(sector)
+    weather = _generator.generate_weather_data(months=12)
+    production = _generator.generate_production_data(sector, years=2)
+    inputs = _generator.generate_input_needs(sector, months=12)
+    market = _generator.generate_market_prices(sector, days=90)
+    stock = _generator.get_current_stock_data(sector)
     return {
         'weather': weather,
         'production': production,
@@ -359,13 +470,19 @@ def get_sector_data(sector, generator):
     }
 
 @st.cache_data
-def get_sme_data(generator):
+def get_sme_data(_generator):
     """Load SME profiles"""
-    return generator.generate_sme_profile(100)
+    return _generator.generate_sme_profile(100)
 
 def voice_to_text():
     """Voice input feature for hands-free operation"""
     st.markdown("### 🎤 Input Suara (Voice Input)")
+    
+    if not VOICE_INPUT_AVAILABLE:
+        st.warning("⚠️ Fitur voice input belum tersedia. Gunakan input teks sebagai alternatif.")
+        st.info("📝 Administrator: Install packages 'streamlit-audiorecorder' dan 'speechrecognition' untuk mengaktifkan fitur ini.")
+        return None
+    
     st.info("📱 Fitur ini memudahkan petani untuk input data tanpa mengetik - cocok untuk di lapangan!")
     
     audio_data = audiorec("Klik untuk rekam", "Sedang merekam...")
