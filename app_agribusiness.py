@@ -533,8 +533,15 @@ def _build_feature_list(features, font_size, line_height, letter_spacing, dyslex
 generator = load_agri_data()
 sme_data = get_sme_data(generator)
 
-st.sidebar.image("https://cdn-icons-png.flaticon.com/512/628/628283.png", width=80)
-st.sidebar.title("🌾 AgriBiz AI")
+SECTOR_ICONS = {
+    'Pertanian': 'attached_assets/stock_images/3d_wheat_grain_rice__a73baeb5.jpg',
+    'Hortikultura': 'attached_assets/stock_images/3d_vegetables_fresh__08697ad3.jpg',
+    'Peternakan': 'attached_assets/stock_images/3d_cow_cattle_livest_166bb429.jpg',
+    'Perikanan': 'attached_assets/stock_images/3d_fish_fishery_aqua_e09fcb29.jpg'
+}
+
+st.sidebar.image("attached_assets/logo-fertique_1761315091092.jpg", width=120)
+st.sidebar.title("Fertique AI")
 st.sidebar.markdown("**Platform Agribusiness Terpadu**")
 st.sidebar.markdown("*Untuk Petani, Peternak, Nelayan, SME*")
 st.sidebar.markdown("---")
@@ -618,15 +625,18 @@ if menu == "🏠 Beranda":
     
     cols = st.columns(4)
     sectors_info = [
-        ("🌾 Pertanian", "Pertanian", "Padi, Jagung, Kedelai, dll"),
-        ("🥬 Hortikultura", "Hortikultura", "Sayur, Buah, Tanaman Hias"),
-        ("🐄 Peternakan", "Peternakan", "Ayam, Sapi, Kambing, dll"),
-        ("🐟 Perikanan", "Perikanan", "Lele, Nila, Udang, dll")
+        ("Pertanian", "Padi, Jagung, Kedelai, dll"),
+        ("Hortikultura", "Sayur, Buah, Tanaman Hias"),
+        ("Peternakan", "Ayam, Sapi, Kambing, dll"),
+        ("Perikanan", "Lele, Nila, Udang, dll")
     ]
     
-    for i, (icon, sector, desc) in enumerate(sectors_info):
+    for i, (sector, desc) in enumerate(sectors_info):
         with cols[i]:
-            if st.button(f"{icon}\n{desc}", key=f"sector_{i}", use_container_width=True):
+            st.image(SECTOR_ICONS[sector], use_column_width=True)
+            st.markdown(f"<h4 style='text-align: center; margin-top: -10px;'>{sector}</h4>", unsafe_allow_html=True)
+            st.markdown(f"<p style='text-align: center; color: #666; font-size: 14px;'>{desc}</p>", unsafe_allow_html=True)
+            if st.button(f"Lihat {sector}", key=f"sector_{i}", use_container_width=True):
                 st.session_state.selected_sector = sector
                 st.rerun()
 
