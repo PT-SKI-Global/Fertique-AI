@@ -878,9 +878,20 @@ if menu == "Beranda":
         </h3>
     """, unsafe_allow_html=True)
     
-    # Sector cards dengan layout yang rata
+    # Sector cards dengan layout yang rata - semua card sama panjang
     st.markdown("""
         <style>
+        [data-testid="column"] > div {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .sector-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 340px;
+        }
         .sector-card {
             text-align: center;
             padding: 16px;
@@ -889,16 +900,13 @@ if menu == "Beranda":
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
             margin-bottom: 12px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         .sector-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .sector-card img {
-            height: 150px !important;
-            width: 100% !important;
-            object-fit: cover !important;
-            border-radius: 8px;
         }
         .sector-title {
             font-size: 18px;
@@ -915,6 +923,10 @@ if menu == "Beranda":
             align-items: center;
             justify-content: center;
         }
+        .sector-button-area {
+            margin-top: auto;
+            padding-top: 12px;
+        }
         </style>
     """, unsafe_allow_html=True)
     
@@ -928,6 +940,7 @@ if menu == "Beranda":
     
     for i, (sector, desc) in enumerate(sectors_info):
         with cols[i]:
+            st.markdown('<div class="sector-container">', unsafe_allow_html=True)
             st.markdown(f"""
                 <div class="sector-card">
                     <div style="height: 150px; overflow: hidden; margin-bottom: 12px; border-radius: 8px;">
@@ -936,12 +949,13 @@ if menu == "Beranda":
                     <div class="sector-title">{sector}</div>
                     <div class="sector-desc">{desc}</div>
                 </div>
+                <div class="sector-button-area">
             """, unsafe_allow_html=True)
-            st.markdown('<div style="margin-top: 12px;"></div>', unsafe_allow_html=True)
             if st.button(f"Lihat {sector}", key=f"sector_{i}", use_container_width=True):
                 st.session_state['selected_sector'] = sector
                 st.session_state['current_menu'] = "Sektor Agribusiness"
                 st.rerun()
+            st.markdown('</div></div>', unsafe_allow_html=True)
 
 elif menu == "Premium Features":
     dyslexia_mode = st.session_state.get('dyslexia_mode', False)
