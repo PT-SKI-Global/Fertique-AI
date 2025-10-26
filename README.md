@@ -1,4 +1,4 @@
-# 🌾 AgriBiz AI - Platform Agribusiness Terpadu
+# 🌾 Fertique AI - Platform Agribusiness Terpadu
 
 [![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web-green.svg)](https://fertique-ai.com)
 [![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://python.org)
@@ -8,7 +8,7 @@
 
 ## 🎯 Overview
 
-**AgriBiz AI** adalah platform agribusiness terpadu berbasis AI yang memberdayakan petani, peternak, petani ikan, dan pelaku usaha (dari UMKM hingga korporat) di Indonesia dengan teknologi prediksi, analisis bisnis, dan community features untuk meningkatkan produktivitas dan profitabilitas 30-50%.
+**Fertique AI** adalah platform agribusiness terpadu berbasis AI yang memberdayakan petani, peternak, petani ikan, dan pelaku usaha (dari UMKM hingga korporat) di Indonesia dengan teknologi prediksi, analisis bisnis, dan community features untuk meningkatkan produktivitas dan profitabilitas 30-50%.
 
 ### 🌟 Key Features
 
