@@ -26,6 +26,28 @@ from premium_features import (
     PDFReportGenerator, ExpertAIConsultation
 )
 
+# Icon Mapping - Professional Images
+ICONS = {
+    'home': 'attached_assets/stock_images/professional_home_ic_80b98149.jpg',
+    'premium': 'attached_assets/stock_images/premium_diamond_crow_2ad1ece4.jpg',
+    'business': 'attached_assets/stock_images/business_analytics_b_961f7269.jpg',
+    'chart': 'attached_assets/stock_images/chart_statistics_gro_af7ab78c.jpg',
+    'community': 'attached_assets/stock_images/community_people_net_069e2e08.jpg',
+    'info': 'attached_assets/stock_images/information_help_abo_0ba38120.jpg',
+    'ai': 'attached_assets/stock_images/artificial_intellige_5f33e75b.jpg',
+    'mobile': 'attached_assets/stock_images/mobile_phone_smartph_6629aab7.jpg',
+    'voice': 'attached_assets/stock_images/microphone_voice_rec_3a5707d3.jpg',
+    'money': 'attached_assets/stock_images/money_dollar_profit__0d59bb51.jpg',
+    'trophy': 'attached_assets/stock_images/trophy_award_achieve_43b55841.jpg',
+    'success': 'attached_assets/stock_images/success_checkmark_ve_fb4963d2.jpg',
+    'star': 'attached_assets/stock_images/gold_star_rating_rev_2182f135.jpg',
+    'download': 'attached_assets/stock_images/download_arrow_save__b9d95872.jpg',
+    'rocket': 'attached_assets/stock_images/rocket_launch_startu_3f81c77c.jpg',
+    'target': 'attached_assets/stock_images/target_goal_objectiv_137543f9.jpg',
+    'bell': 'attached_assets/stock_images/bell_notification_al_3215fa6a.jpg',
+    'medal': 'attached_assets/stock_images/medal_badge_award_re_427dc3c1.jpg',
+}
+
 st.set_page_config(
     page_title="Fertique AI - Platform Agribusiness Terpadu",
     page_icon="🌾",
@@ -187,16 +209,103 @@ st.markdown("""
         min-height: 56px;
     }
     
-    /* Achievement Badges */
+    /* Achievement Badges - Modern Design */
     .achievement-badge {
         display: inline-block;
-        background: gold;
-        padding: 10px 18px;
-        border-radius: 25px;
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        padding: 12px 24px;
+        border-radius: 30px;
         margin: 8px;
         font-weight: bold;
         font-size: 16px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .achievement-badge:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+    }
+    
+    /* Feature Card - Glassmorphism */
+    .feature-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 24px;
+        margin: 16px 0;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Stats Card - Modern Gradient */
+    .stats-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        padding: 24px;
+        color: white;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .stats-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* Hero Section */
+    .hero-section {
+        background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+        border-radius: 25px;
+        padding: 40px;
+        color: white;
+        margin-bottom: 32px;
+        box-shadow: 0 10px 40px rgba(46, 125, 50, 0.3);
+    }
+    
+    /* Premium Badge */
+    .premium-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        padding: 8px 20px;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 14px;
+        color: #000;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
+    /* Icon Container */
+    .icon-container {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(46, 125, 50, 0.1);
+        margin-bottom: 12px;
+    }
+    
+    .icon-container img {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
     }
     
     /* Sidebar - Mobile Optimized */
