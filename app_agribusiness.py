@@ -37,26 +37,43 @@ def get_base64_image(image_path):
     except:
         return ""
 
-# Icon Mapping - Professional Images
+# Icon Mapping - 3D Materialistic Icons
 ICONS = {
-    'home': 'attached_assets/stock_images/professional_home_ic_80b98149.jpg',
-    'premium': 'attached_assets/stock_images/premium_diamond_crow_2ad1ece4.jpg',
-    'business': 'attached_assets/stock_images/business_analytics_b_961f7269.jpg',
-    'chart': 'attached_assets/stock_images/chart_statistics_gro_af7ab78c.jpg',
-    'community': 'attached_assets/stock_images/community_people_net_069e2e08.jpg',
-    'info': 'attached_assets/stock_images/information_help_abo_0ba38120.jpg',
+    # Original professional icons
+    'home': 'attached_assets/stock_images/3d_icon_home_house_m_79b245c7.jpg',
+    'premium': 'attached_assets/stock_images/3d_icon_diamond_prem_8f6fc27d.jpg',
+    'business': 'attached_assets/stock_images/3d_icon_briefcase_bu_30e1bf02.jpg',
+    'chart': 'attached_assets/stock_images/3d_icon_chart_analyt_ef25ae28.jpg',
+    'community': 'attached_assets/stock_images/3d_icon_game_control_529ce4e9.jpg',
+    'info': 'attached_assets/stock_images/3d_icon_info_informa_c36fbab9.jpg',
     'ai': 'attached_assets/stock_images/artificial_intellige_5f33e75b.jpg',
-    'mobile': 'attached_assets/stock_images/mobile_phone_smartph_6629aab7.jpg',
-    'voice': 'attached_assets/stock_images/microphone_voice_rec_3a5707d3.jpg',
+    'mobile': 'attached_assets/stock_images/3d_icon_smartphone_m_ffd42c8f.jpg',
+    'voice': 'attached_assets/stock_images/3d_icon_microphone_v_67c2d942.jpg',
     'money': 'attached_assets/stock_images/money_dollar_profit__0d59bb51.jpg',
-    'trophy': 'attached_assets/stock_images/trophy_award_achieve_43b55841.jpg',
-    'success': 'attached_assets/stock_images/success_checkmark_ve_fb4963d2.jpg',
-    'star': 'attached_assets/stock_images/gold_star_rating_rev_2182f135.jpg',
-    'download': 'attached_assets/stock_images/download_arrow_save__b9d95872.jpg',
+    'trophy': 'attached_assets/stock_images/3d_icon_trophy_achie_28e73ec1.jpg',
+    'success': 'attached_assets/stock_images/3d_icon_checkmark_su_8a409a55.jpg',
+    'star': 'attached_assets/stock_images/3d_icon_star_rating__b2a08fc4.jpg',
+    'download': 'attached_assets/stock_images/3d_icon_download_inb_f4882014.jpg',
     'rocket': 'attached_assets/stock_images/rocket_launch_startu_3f81c77c.jpg',
-    'target': 'attached_assets/stock_images/target_goal_objectiv_137543f9.jpg',
-    'bell': 'attached_assets/stock_images/bell_notification_al_3215fa6a.jpg',
-    'medal': 'attached_assets/stock_images/medal_badge_award_re_427dc3c1.jpg',
+    'target': 'attached_assets/stock_images/3d_icon_target_goal__0f5730b1.jpg',
+    'bell': 'attached_assets/stock_images/3d_icon_notification_c816adab.jpg',
+    'medal': 'attached_assets/stock_images/3d_icon_gold_medal_f_6eae78a4.jpg',
+    # Additional 3D icons
+    'wheat': 'attached_assets/stock_images/3d_icon_wheat_farmin_272ea3b7.jpg',
+    'warning': 'attached_assets/stock_images/3d_icon_warning_aler_46f50465.jpg',
+    'lightning': 'attached_assets/stock_images/3d_icon_lightning_bo_db14bf25.jpg',
+    'sparkle': 'attached_assets/stock_images/3d_icon_sparkle_star_cc2f9c7b.jpg',
+    'trending': 'attached_assets/stock_images/3d_icon_trending_up__5a7c3fc7.jpg',
+    'phone': 'attached_assets/stock_images/3d_icon_phone_call_m_8391534e.jpg',
+    'email': 'attached_assets/stock_images/3d_icon_email_mail_m_623dfcee.jpg',
+    'location': 'attached_assets/stock_images/3d_icon_location_pin_487938ad.jpg',
+    'search': 'attached_assets/stock_images/3d_icon_search_magni_2f4d6563.jpg',
+    'plus': 'attached_assets/stock_images/3d_icon_plus_add_new_e33d3366.jpg',
+    'send': 'attached_assets/stock_images/3d_icon_send_share_o_019cc74a.jpg',
+    'gift': 'attached_assets/stock_images/3d_icon_gift_present_5aceea8c.jpg',
+    'clipboard': 'attached_assets/stock_images/3d_icon_clipboard_do_182a5279.jpg',
+    'calendar': 'attached_assets/stock_images/3d_icon_calendar_dat_da690ff5.jpg',
+    'chat': 'attached_assets/stock_images/3d_icon_chat_message_3cd6e4b8.jpg',
 }
 
 st.set_page_config(
@@ -669,16 +686,25 @@ st.sidebar.markdown("---")
 user_plan = PremiumSubscription.get_user_plan()
 plan_info = PremiumSubscription.get_plan_info(user_plan)
 
-menu_options = ["🏠 Beranda", "💎 Premium Features", "🌾 Sektor Agribusiness", "💼 Dashboard Bisnis", 
-                "📊 Prediksi & Analisis", "🎮 Komunitas & Gamifikasi", "ℹ️ Tentang"]
+menu_options = ["Beranda", "Premium Features", "Sektor Agribusiness", "Dashboard Bisnis", 
+                "Prediksi & Analisis", "Komunitas & Gamifikasi", "Tentang"]
 
 if 'current_menu' not in st.session_state:
-    st.session_state.current_menu = "🏠 Beranda"
+    st.session_state.current_menu = "Beranda"
 
 default_index = menu_options.index(st.session_state.current_menu) if st.session_state.current_menu in menu_options else 0
 
+# Display 3D icons above menu
+st.sidebar.markdown("<div style='text-align: center; margin: 20px 0;'>", unsafe_allow_html=True)
+menu_icon_cols = st.sidebar.columns(4)
+menu_icons = ['home', 'premium', 'wheat', 'business']
+for i, ic in enumerate(menu_icons):
+    with menu_icon_cols[i]:
+        st.image(ICONS[ic], width=40)
+st.sidebar.markdown("</div>", unsafe_allow_html=True)
+
 menu = st.sidebar.radio(
-    "📱 Menu Utama",
+    "Menu Utama",
     menu_options,
     index=default_index
 )
@@ -687,9 +713,9 @@ if menu != st.session_state.current_menu:
     st.session_state.current_menu = menu
 
 st.sidebar.markdown("---")
-st.sidebar.markdown(f"**📦 Paket Anda:** {plan_info['name']}")
+st.sidebar.markdown(f"**Paket Anda:** {plan_info['name']}")
 if user_plan == 'free':
-    st.sidebar.info("⬆️ Upgrade ke Pro untuk fitur premium!")
+    st.sidebar.info("Upgrade ke Pro untuk fitur premium!")
 
 st.sidebar.markdown("---")
 
@@ -697,7 +723,7 @@ if 'dyslexia_mode' not in st.session_state:
     st.session_state.dyslexia_mode = False
 
 dyslexia_toggle = st.sidebar.checkbox(
-    "♿ Mode Dyslexia-Friendly",
+    "Mode Dyslexia-Friendly",
     value=st.session_state.dyslexia_mode,
     help="Aktifkan untuk font lebih besar, spasi lebih lega, dan kontras tinggi"
 )
@@ -715,7 +741,7 @@ sector_options = list(generator.sectors.keys())
 default_sector_index = sector_options.index(st.session_state.selected_sector) if st.session_state.selected_sector in sector_options else 0
 
 selected_sector = st.sidebar.selectbox(
-    "🔍 Pilih Sektor",
+    "Pilih Sektor",
     sector_options,
     index=default_sector_index
 )
@@ -723,20 +749,29 @@ selected_sector = st.sidebar.selectbox(
 if selected_sector != st.session_state.selected_sector:
     st.session_state.selected_sector = selected_sector
 
-if menu == "🏠 Beranda":
+if menu == "Beranda":
     # Hero Section
-    st.markdown("""
+    st.markdown(f"""
         <div class="hero-section">
-            <h1 style="color: white; margin-bottom: 16px; font-size: 36px;">🌾 Selamat Datang di Fertique AI</h1>
+            <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                <img src="data:image/jpeg;base64,{get_base64_image(ICONS['wheat'])}" style="width: 48px; height: 48px; margin-right: 16px;">
+                <h1 style="color: white; margin: 0; font-size: 36px;">Selamat Datang di Fertique AI</h1>
+            </div>
             <p style="font-size: 20px; margin-bottom: 24px; opacity: 0.95;">Platform Agribusiness Terpadu Berbasis AI untuk Semua Sektor</p>
             <div class="premium-badge">
-                ⚡ Tingkatkan produktivitas hingga 35%
+                <img src="data:image/jpeg;base64,{get_base64_image(ICONS['lightning'])}" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                Tingkatkan produktivitas hingga 35%
             </div>
         </div>
     """, unsafe_allow_html=True)
     
     # Fitur Unggulan Section
-    st.markdown("## ✨ Fitur Unggulan")
+    st.markdown(f"""
+        <h2 style="display: flex; align-items: center; margin: 24px 0;">
+            <img src="data:image/jpeg;base64,{get_base64_image(ICONS['sparkle'])}" style="width: 32px; height: 32px; margin-right: 12px;">
+            Fitur Unggulan
+        </h2>
+    """, unsafe_allow_html=True)
     
     feature_cols = st.columns(3)
     features_data = [
@@ -787,7 +822,12 @@ if menu == "🏠 Beranda":
     st.markdown("---")
     
     # Statistics Section
-    st.markdown("## 📊 Statistik Platform")
+    st.markdown(f"""
+        <h2 style="display: flex; align-items: center; margin: 24px 0;">
+            <img src="data:image/jpeg;base64,{get_base64_image(ICONS['chart'])}" style="width: 32px; height: 32px; margin-right: 12px;">
+            Statistik Platform
+        </h2>
+    """, unsafe_allow_html=True)
     stats_cols = st.columns(3)
     
     with stats_cols[0]:
@@ -820,15 +860,25 @@ if menu == "🏠 Beranda":
     st.markdown("---")
     
     # Achievement Section
-    st.markdown("## 🏆 Achievement Anda")
+    st.markdown(f"""
+        <h2 style="display: flex; align-items: center; margin: 24px 0;">
+            <img src="data:image/jpeg;base64,{get_base64_image(ICONS['trophy'])}" style="width: 32px; height: 32px; margin-right: 12px;">
+            Achievement Anda
+        </h2>
+    """, unsafe_allow_html=True)
     ach_col1, ach_col2 = st.columns(2)
     with ach_col1:
-        st.markdown('<div class="achievement-badge">🌟 Pengguna Baru - Welcome to Fertique!</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="achievement-badge"><img src="data:image/jpeg;base64,{get_base64_image(ICONS["star"])}" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">Pengguna Baru - Welcome to Fertique!</div>', unsafe_allow_html=True)
     with ach_col2:
-        st.markdown('<div class="achievement-badge">📈 First Prediction - Selamat!</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="achievement-badge"><img src="data:image/jpeg;base64,{get_base64_image(ICONS["trending"])}" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">First Prediction - Selamat!</div>', unsafe_allow_html=True)
     
     st.markdown("---")
-    st.markdown("### 🌾 Jelajahi Sektor Agribusiness")
+    st.markdown(f"""
+        <h3 style="display: flex; align-items: center; margin: 20px 0;">
+            <img src="data:image/jpeg;base64,{get_base64_image(ICONS['wheat'])}" style="width: 28px; height: 28px; margin-right: 10px;">
+            Jelajahi Sektor Agribusiness
+        </h3>
+    """, unsafe_allow_html=True)
     
     cols = st.columns(4)
     sectors_info = [
@@ -845,10 +895,10 @@ if menu == "🏠 Beranda":
             st.markdown(f"<p style='text-align: center; color: #666; font-size: 14px;'>{desc}</p>", unsafe_allow_html=True)
             if st.button(f"Lihat {sector}", key=f"sector_{i}", width='stretch'):
                 st.session_state['selected_sector'] = sector
-                st.session_state['current_menu'] = "🌾 Sektor Agribusiness"
+                st.session_state['current_menu'] = "Sektor Agribusiness"
                 st.rerun()
 
-elif menu == "💎 Premium Features":
+elif menu == "Premium Features":
     dyslexia_mode = st.session_state.get('dyslexia_mode', False)
     
     dyslexia_styles = """
@@ -873,7 +923,10 @@ elif menu == "💎 Premium Features":
     st.markdown(dyslexia_styles, unsafe_allow_html=True)
     
     title_class = 'class="dyslexia-mode"' if dyslexia_mode else ''
-    st.markdown(f'<h1 {title_class}>💎 Fertique AI Premium</h1>', unsafe_allow_html=True)
+    st.markdown(f'''<h1 {title_class} style="display: flex; align-items: center;">
+        <img src="data:image/jpeg;base64,{get_base64_image(ICONS['premium'])}" style="width: 42px; height: 42px; margin-right: 16px;">
+        Fertique AI Premium
+    </h1>''', unsafe_allow_html=True)
     st.markdown(f'<h3 {title_class}>Unlock Fitur Canggih untuk Maksimalkan Bisnis Agribusiness Anda</h3>', unsafe_allow_html=True)
     
     current_plan = PremiumSubscription.get_user_plan()
