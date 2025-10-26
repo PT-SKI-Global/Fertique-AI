@@ -7,6 +7,8 @@ import plotly.graph_objects as go
 from st_aggrid import AgGrid, GridOptionsBuilder
 import io
 import tempfile
+import base64
+from pathlib import Path
 
 try:
     from audiorecorder import audiorec
@@ -25,6 +27,15 @@ from premium_features import (
     PremiumSubscription, AdvancedPredictions, SMSAlertSystem,
     PDFReportGenerator, ExpertAIConsultation
 )
+
+@st.cache_data
+def get_base64_image(image_path):
+    """Convert image to base64 string for HTML embedding (cached for performance)"""
+    try:
+        with open(image_path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode()
+    except:
+        return ""
 
 # Icon Mapping - Professional Images
 ICONS = {
@@ -713,43 +724,108 @@ if selected_sector != st.session_state.selected_sector:
     st.session_state.selected_sector = selected_sector
 
 if menu == "🏠 Beranda":
-    st.title("🌾 Selamat Datang di Fertique AI")
-    st.markdown("### Platform Agribusiness Terpadu Berbasis AI untuk Semua Sektor")
+    # Hero Section
+    st.markdown("""
+        <div class="hero-section">
+            <h1 style="color: white; margin-bottom: 16px; font-size: 36px;">🌾 Selamat Datang di Fertique AI</h1>
+            <p style="font-size: 20px; margin-bottom: 24px; opacity: 0.95;">Platform Agribusiness Terpadu Berbasis AI untuk Semua Sektor</p>
+            <div class="premium-badge">
+                ⚡ Tingkatkan produktivitas hingga 35%
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
     
-    col1, col2 = st.columns([2, 1])
+    # Fitur Unggulan Section
+    st.markdown("## ✨ Fitur Unggulan")
     
-    with col1:
-        st.markdown("""
-        Fertique AI adalah solusi digital terpadu untuk:
-        - 🌾 **Petani** - Prediksi kebutuhan pupuk & pestisida
-        - 🥬 **Petani Hortikultura** - Optimasi hasil sayur & buah
-        - 🐄 **Peternak** - Manajemen pakan & kesehatan ternak
-        - 🐟 **Petani Ikan** - Prediksi pakan & kualitas air
-        - 💼 **Pemilik Usaha** - Analisis bisnis & profitabilitas
-        """)
-        
-        st.markdown("### 🎯 Fitur Unggulan:")
-        features = {
-            "🤖 AI Prediction": "Prediksi kebutuhan input berbasis machine learning",
-            "📱 Mobile Friendly": "Akses di Android, iOS, dan browser",
-            "🎤 Voice Input": "Input data dengan suara (hands-free)",
-            "💰 Analisis Bisnis": "ROI calculator, profit tracking",
-            "🏆 Gamifikasi": "Badges, leaderboard, dan rewards",
-            "🤝 Komunitas": "Berbagi tips, sukses stories, Q&A"
+    feature_cols = st.columns(3)
+    features_data = [
+        {
+            "icon": ICONS['ai'],
+            "title": "AI Prediction",
+            "desc": "Prediksi kebutuhan input berbasis machine learning dengan akurasi tinggi"
+        },
+        {
+            "icon": ICONS['mobile'],
+            "title": "Mobile Friendly",
+            "desc": "Akses di Android, iOS, dan browser dengan tampilan responsif"
+        },
+        {
+            "icon": ICONS['voice'],
+            "title": "Voice Input",
+            "desc": "Input data dengan suara (hands-free) untuk kemudahan di lapangan"
+        },
+        {
+            "icon": ICONS['money'],
+            "title": "Analisis Bisnis",
+            "desc": "ROI calculator, profit tracking, dan perencanaan keuangan"
+        },
+        {
+            "icon": ICONS['trophy'],
+            "title": "Gamifikasi",
+            "desc": "Badges, leaderboard, dan rewards untuk motivasi produktivitas"
+        },
+        {
+            "icon": ICONS['community'],
+            "title": "Komunitas",
+            "desc": "Berbagi tips, sukses stories, dan Q&A dengan sesama pelaku usaha"
         }
-        
-        for title, desc in features.items():
-            st.markdown(f"**{title}**: {desc}")
+    ]
     
-    with col2:
-        st.markdown("### 📊 Statistik Platform")
-        st.metric("Total Pelaku Usaha", "10,000+", "+25%")
-        st.metric("Transaksi Bulanan", "Rp 50M", "+40%")
-        st.metric("Rating Pengguna", "4.8/5.0", "⭐⭐⭐⭐")
-        
-        st.markdown("### 🏆 Achievement Anda")
-        st.markdown('<div class="achievement-badge">🌟 Pengguna Baru</div>', unsafe_allow_html=True)
-        st.markdown('<div class="achievement-badge">📈 First Prediction</div>', unsafe_allow_html=True)
+    for i, feature in enumerate(features_data):
+        with feature_cols[i % 3]:
+            st.markdown(f"""
+                <div class="feature-card">
+                    <div class="icon-container">
+                        <img src="data:image/jpeg;base64,{get_base64_image(feature['icon'])}" style="width: 32px; height: 32px; object-fit: contain;">
+                    </div>
+                    <h3 style="margin-top: 12px; margin-bottom: 8px; font-size: 18px;">{feature['title']}</h3>
+                    <p style="color: #666; font-size: 14px; margin: 0;">{feature['desc']}</p>
+                </div>
+            """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    # Statistics Section
+    st.markdown("## 📊 Statistik Platform")
+    stats_cols = st.columns(3)
+    
+    with stats_cols[0]:
+        st.markdown("""
+            <div class="stats-card">
+                <h2 style="color: white; margin: 0; font-size: 36px;">10,000+</h2>
+                <p style="color: white; opacity: 0.9; margin: 8px 0 0 0;">Total Pelaku Usaha</p>
+                <p style="color: #4ade80; margin: 4px 0 0 0; font-size: 14px;">↑ 25% dari bulan lalu</p>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    with stats_cols[1]:
+        st.markdown("""
+            <div class="stats-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <h2 style="color: white; margin: 0; font-size: 36px;">Rp 50M</h2>
+                <p style="color: white; opacity: 0.9; margin: 8px 0 0 0;">Transaksi Bulanan</p>
+                <p style="color: #4ade80; margin: 4px 0 0 0; font-size: 14px;">↑ 40% dari bulan lalu</p>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    with stats_cols[2]:
+        st.markdown("""
+            <div class="stats-card" style="background: linear-gradient(135deg, #ffa751 0%, #ffe259 100%);">
+                <h2 style="color: #333; margin: 0; font-size: 36px;">4.8/5.0</h2>
+                <p style="color: #333; opacity: 0.9; margin: 8px 0 0 0;">Rating Pengguna</p>
+                <p style="color: #333; margin: 4px 0 0 0; font-size: 14px;">⭐⭐⭐⭐⭐</p>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    # Achievement Section
+    st.markdown("## 🏆 Achievement Anda")
+    ach_col1, ach_col2 = st.columns(2)
+    with ach_col1:
+        st.markdown('<div class="achievement-badge">🌟 Pengguna Baru - Welcome to Fertique!</div>', unsafe_allow_html=True)
+    with ach_col2:
+        st.markdown('<div class="achievement-badge">📈 First Prediction - Selamat!</div>', unsafe_allow_html=True)
     
     st.markdown("---")
     st.markdown("### 🌾 Jelajahi Sektor Agribusiness")
