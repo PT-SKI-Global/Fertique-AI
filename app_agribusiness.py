@@ -769,9 +769,8 @@ if menu == "Beranda":
     """, unsafe_allow_html=True)
     
     # Fitur Unggulan Section
-    st.markdown(f"""
-        <h2 style="display: flex; align-items: center; margin: 24px 0;">
-            <img src="data:image/jpeg;base64,{get_base64_image(ICONS['sparkle'])}" style="width: 32px; height: 32px; margin-right: 12px;">
+    st.markdown("""
+        <h2 style="margin: 24px 0;">
             Fitur Unggulan
         </h2>
     """, unsafe_allow_html=True)
@@ -824,9 +823,8 @@ if menu == "Beranda":
     st.markdown("---")
     
     # Statistics Section
-    st.markdown(f"""
-        <h2 style="display: flex; align-items: center; margin: 24px 0;">
-            <img src="data:image/jpeg;base64,{get_base64_image(ICONS['chart'])}" style="width: 32px; height: 32px; margin-right: 12px;">
+    st.markdown("""
+        <h2 style="margin: 24px 0;">
             Statistik Platform
         </h2>
     """, unsafe_allow_html=True)
@@ -862,9 +860,8 @@ if menu == "Beranda":
     st.markdown("---")
     
     # Achievement Section
-    st.markdown(f"""
-        <h2 style="display: flex; align-items: center; margin: 24px 0;">
-            <img src="data:image/jpeg;base64,{get_base64_image(ICONS['trophy'])}" style="width: 32px; height: 32px; margin-right: 12px;">
+    st.markdown("""
+        <h2 style="margin: 24px 0;">
             Achievement Anda
         </h2>
     """, unsafe_allow_html=True)
@@ -875,9 +872,8 @@ if menu == "Beranda":
         st.markdown(f'<div class="achievement-badge"><img src="data:image/jpeg;base64,{get_base64_image(ICONS["trending"])}" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">First Prediction - Selamat!</div>', unsafe_allow_html=True)
     
     st.markdown("---")
-    st.markdown(f"""
-        <h3 style="display: flex; align-items: center; margin: 20px 0;">
-            <img src="data:image/jpeg;base64,{get_base64_image(ICONS['wheat'])}" style="width: 28px; height: 28px; margin-right: 10px;">
+    st.markdown("""
+        <h3 style="margin: 20px 0;">
             Jelajahi Sektor Agribusiness
         </h3>
     """, unsafe_allow_html=True)

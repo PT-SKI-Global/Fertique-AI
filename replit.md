@@ -40,6 +40,7 @@ Preferred communication style: Simple, everyday language.
    - **Feature Cards**: 6 cards in 3-column responsive layout
      - First 3 cards without icons: AI Prediction, Mobile Friendly, Voice Input (clean minimalist design)
      - Last 3 cards with 3D icons: Analisis Bisnis, Gamifikasi, Komunitas
+   - **Section Headings**: All headings clean without icons (Fitur Unggulan, Statistik Platform, Achievement Anda, Jelajahi Sektor)
    - **Statistics Cards**: 3 cards with different gradient backgrounds
      - Total Pelaku Usaha: 10,000+ (blue-purple gradient)
      - Transaksi Bulanan: Rp 50M (pink-red gradient)
