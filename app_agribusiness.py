@@ -878,6 +878,46 @@ if menu == "Beranda":
         </h3>
     """, unsafe_allow_html=True)
     
+    # Sector cards dengan layout yang rata
+    st.markdown("""
+        <style>
+        .sector-card {
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 12px;
+        }
+        .sector-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .sector-card img {
+            height: 150px !important;
+            width: 100% !important;
+            object-fit: cover !important;
+            border-radius: 8px;
+        }
+        .sector-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 12px 0 8px 0;
+            color: #2E7D32;
+        }
+        .sector-desc {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 0;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
     cols = st.columns(4)
     sectors_info = [
         ("Pertanian", "Padi, Jagung, Kedelai, dll"),
@@ -888,10 +928,17 @@ if menu == "Beranda":
     
     for i, (sector, desc) in enumerate(sectors_info):
         with cols[i]:
-            st.image(SECTOR_ICONS[sector], width='stretch')
-            st.markdown(f"<h4 style='text-align: center; margin-top: -10px;'>{sector}</h4>", unsafe_allow_html=True)
-            st.markdown(f"<p style='text-align: center; color: #666; font-size: 14px;'>{desc}</p>", unsafe_allow_html=True)
-            if st.button(f"Lihat {sector}", key=f"sector_{i}", width='stretch'):
+            st.markdown(f"""
+                <div class="sector-card">
+                    <div style="height: 150px; overflow: hidden; margin-bottom: 12px; border-radius: 8px;">
+                        <img src="{SECTOR_ICONS[sector]}" style="width: 100%; height: 150px; object-fit: cover;">
+                    </div>
+                    <div class="sector-title">{sector}</div>
+                    <div class="sector-desc">{desc}</div>
+                </div>
+            """, unsafe_allow_html=True)
+            st.markdown('<div style="margin-top: 12px;"></div>', unsafe_allow_html=True)
+            if st.button(f"Lihat {sector}", key=f"sector_{i}", use_container_width=True):
                 st.session_state['selected_sector'] = sector
                 st.session_state['current_menu'] = "Sektor Agribusiness"
                 st.rerun()

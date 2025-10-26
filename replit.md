@@ -46,7 +46,7 @@ Preferred communication style: Simple, everyday language.
      - Transaksi Bulanan: Rp 50M (pink-red gradient)
      - Rating Pengguna: 4.8/5.0 (orange-yellow gradient)
    - **Achievement Section**: Redesigned badges with improved styling
-   - **Sector Cards**: Professional images for all 4 sectors
+   - **Sector Cards**: Professional images for all 4 sectors with fixed 150px height for consistent alignment
 
 4. **Performance Optimizations**
    - Cached icon loading with `@st.cache_data` decorator
