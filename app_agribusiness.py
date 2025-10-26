@@ -750,13 +750,16 @@ if selected_sector != st.session_state.selected_sector:
     st.session_state.selected_sector = selected_sector
 
 if menu == "Beranda":
-    # Hero Section
+    # Hero Section with Background Image
+    hero_bg = get_base64_image('attached_assets/stock_images/agribusiness_farming_a19e238a.jpg')
     st.markdown(f"""
-        <div class="hero-section">
-            <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-                <img src="data:image/jpeg;base64,{get_base64_image(ICONS['wheat'])}" style="width: 48px; height: 48px; margin-right: 16px;">
-                <h1 style="color: white; margin: 0; font-size: 36px;">Selamat Datang di Fertique AI</h1>
-            </div>
+        <div class="hero-section" style="
+            background-image: linear-gradient(rgba(46, 125, 50, 0.85), rgba(27, 94, 32, 0.85)), 
+                              url(data:image/jpeg;base64,{hero_bg});
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;">
+            <h1 style="color: white; margin-bottom: 16px; font-size: 36px;">Selamat Datang di Fertique AI</h1>
             <p style="font-size: 20px; margin-bottom: 24px; opacity: 0.95;">Platform Agribusiness Terpadu Berbasis AI untuk Semua Sektor</p>
             <div class="premium-badge">
                 <img src="data:image/jpeg;base64,{get_base64_image(ICONS['lightning'])}" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
@@ -776,17 +779,17 @@ if menu == "Beranda":
     feature_cols = st.columns(3)
     features_data = [
         {
-            "icon": ICONS['ai'],
+            "icon": None,
             "title": "AI Prediction",
             "desc": "Prediksi kebutuhan input berbasis machine learning dengan akurasi tinggi"
         },
         {
-            "icon": ICONS['mobile'],
+            "icon": None,
             "title": "Mobile Friendly",
             "desc": "Akses di Android, iOS, dan browser dengan tampilan responsif"
         },
         {
-            "icon": ICONS['voice'],
+            "icon": None,
             "title": "Voice Input",
             "desc": "Input data dengan suara (hands-free) untuk kemudahan di lapangan"
         },
@@ -809,11 +812,10 @@ if menu == "Beranda":
     
     for i, feature in enumerate(features_data):
         with feature_cols[i % 3]:
+            icon_html = f'<div class="icon-container"><img src="data:image/jpeg;base64,{get_base64_image(feature["icon"])}" style="width: 32px; height: 32px; object-fit: contain;"></div>' if feature['icon'] else ''
             st.markdown(f"""
                 <div class="feature-card">
-                    <div class="icon-container">
-                        <img src="data:image/jpeg;base64,{get_base64_image(feature['icon'])}" style="width: 32px; height: 32px; object-fit: contain;">
-                    </div>
+                    {icon_html}
                     <h3 style="margin-top: 12px; margin-bottom: 8px; font-size: 18px;">{feature['title']}</h3>
                     <p style="color: #666; font-size: 14px; margin: 0;">{feature['desc']}</p>
                 </div>

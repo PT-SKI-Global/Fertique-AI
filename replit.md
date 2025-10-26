@@ -36,10 +36,10 @@ Preferred communication style: Simple, everyday language.
    - Premium badges with pulse animation
 
 3. **Homepage (Beranda) Redesign**
-   - **Hero Section**: Gradient background with title, subtitle, and productivity badge
-   - **Feature Cards**: 6 cards in 3-column responsive layout with professional icons
-     - AI Prediction, Mobile Friendly, Voice Input
-     - Analisis Bisnis, Gamifikasi, Komunitas
+   - **Hero Section**: Real agribusiness background photo with green transparent overlay, clean title without icons
+   - **Feature Cards**: 6 cards in 3-column responsive layout
+     - First 3 cards without icons: AI Prediction, Mobile Friendly, Voice Input (clean minimalist design)
+     - Last 3 cards with 3D icons: Analisis Bisnis, Gamifikasi, Komunitas
    - **Statistics Cards**: 3 cards with different gradient backgrounds
      - Total Pelaku Usaha: 10,000+ (blue-purple gradient)
      - Transaksi Bulanan: Rp 50M (pink-red gradient)
