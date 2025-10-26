@@ -10,6 +10,41 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 26, 2025)
 
+### Streamlit Community Cloud Deployment Setup
+**Prepared project for deployment to Streamlit Community Cloud:**
+
+1. **Requirements.txt Created**
+   - Exported all dependencies from pyproject.toml
+   - Contains 14 essential libraries (Streamlit, Pandas, Plotly, scikit-learn, etc.)
+   - Ready for automatic installation on Streamlit Cloud
+
+2. **.gitignore Created**
+   - Excludes Python cache files (__pycache__, *.pyc)
+   - Excludes Streamlit secrets (secrets.toml)
+   - Excludes Replit-specific files (.replit, replit.nix, .cache/)
+   - Excludes local data files (*.xlsx, *.db)
+   - Optimized for GitHub repository
+
+3. **Comprehensive Deployment Guide**
+   - Created STREAMLIT_CLOUD_DEPLOYMENT.md in Indonesian
+   - Step-by-step guide for non-technical users
+   - Covers GitHub upload (Git CLI & manual methods)
+   - Complete Streamlit Cloud deployment instructions
+   - Troubleshooting section for common errors
+   - Secrets management guide for API keys
+   - Custom domain setup instructions
+   - Auto-update workflow from GitHub
+
+4. **Security Verification**
+   - No hardcoded API keys in application code ✓
+   - No absolute file paths (all relative paths) ✓
+   - Secrets properly managed via st.secrets ✓
+
+5. **Deployment Readiness**
+   - All files verified and ready for deployment
+   - Architecture review completed and approved
+   - Platform-agnostic design (works on any Streamlit-compatible host)
+
 ### Complete 3D Icon Migration - All Emoji Replaced
 **Replaced ALL emoji with 3D materialistic professional icons:**
 
