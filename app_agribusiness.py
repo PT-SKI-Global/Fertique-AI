@@ -686,11 +686,19 @@ st.sidebar.markdown("---")
 user_plan = PremiumSubscription.get_user_plan()
 plan_info = PremiumSubscription.get_plan_info(user_plan)
 
-menu_options = ["Beranda", "Premium Features", "Sektor Agribusiness", "Dashboard Bisnis", 
-                "Prediksi & Analisis", "Komunitas & Gamifikasi", "Tentang"]
+menu_options = [
+    "Beranda",
+    "Premium Features",
+    "🌾 Sektor Agribusiness",
+    "💼 Dashboard Bisnis",
+    "📊 Prediksi & Analisis",
+    "🎮 Komunitas & Gamifikasi",
+    "Tentang"
+]
 
 if 'current_menu' not in st.session_state:
     st.session_state.current_menu = "Beranda"
+
 
 default_index = menu_options.index(st.session_state.current_menu) if st.session_state.current_menu in menu_options else 0
 
@@ -953,7 +961,7 @@ if menu == "Beranda":
             """, unsafe_allow_html=True)
             if st.button(f"Lihat {sector}", key=f"sector_{i}", use_container_width=True):
                 st.session_state['selected_sector'] = sector
-                st.session_state['current_menu'] = "Sektor Agribusiness"
+                st.session_state['current_menu'] = "🌾 Sektor Agribusiness"
                 st.rerun()
             st.markdown('</div></div>', unsafe_allow_html=True)
 
